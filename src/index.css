@@ -11,6 +11,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --primary-color: #313E50;
+  --secondary-color: #3A435E;
+  --third-color: #455561;
+  --accent-color: #5C6672;
+  --accent-color2: #CFDBD5;
 }
 
 a {
@@ -25,9 +31,8 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 
 h1 {
