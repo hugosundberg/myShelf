@@ -11,24 +11,19 @@ interface Book {
 
 interface BookProps {
   book: Book;
-  isVisible: boolean;
 }
 
-export const BookCard = ({ book, isVisible }: BookProps) => {
-  if (isVisible) {
-    return (
-      <div className={styles.bookCard}>
-        <div className={styles.imageContainer}>
-          <img
-            src={book.img}
-            className={styles.bookImg}
-            alt="book cover image"
-          />
-        </div>
-        <h2>{book.title}</h2>
-        <p>{book.author}</p>
-        <i className="bi bi-heart"></i>
+export const BookCard = ({ book }: BookProps) => {
+  return (
+    <div className={styles.bookCard}>
+      <div className={styles.imageContainer}>
+        <img src={book.img} className={styles.bookImg} alt="book cover image" />
       </div>
-    );
-  }
+      <h2>{book.title}</h2>
+      <p>{book.author}</p>
+      <button className={styles.likeButton}>
+        <i className="bi bi-heart"></i>
+      </button>
+    </div>
+  );
 };

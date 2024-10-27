@@ -3,6 +3,7 @@ import "./App.css";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import booksAPI from "./services/booksAPI";
 import { BookCard } from "./components/BookCard/BookCard";
+import BookList from "./components/BookList/BookList";
 
 interface Book {
   id: string;
@@ -32,19 +33,7 @@ function App() {
     <>
       <NavigationBar />
       <div className="contentBody">
-        <h2>MyShelf</h2>
-        <div className="bookCardContainer">
-          <BookCard
-            isVisible={isBookContainerVisible}
-            book={bookSearchResult[0]}
-          />
-        </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium
-          voluptatibus esse quas dignissimos architecto doloribus amet corrupti
-          iusto dolor temporibus a fugit aperiam, autem culpa porro iure?
-          Possimus, doloremque consequatur.
-        </p>
+        <BookList isVisible={isBookContainerVisible} books={bookSearchResult} />
         <button onClick={handleBookSearch}>TEST CALL</button>
       </div>
     </>
