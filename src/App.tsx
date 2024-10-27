@@ -1,9 +1,10 @@
-import { useLayoutEffect, useState } from "react";
 import "./App.css";
-import NavigationBar from "./components/NavigationBar/NavigationBar";
 import booksAPI from "./services/booksAPI";
-import { BookCard } from "./components/BookCard/BookCard";
-import BookList from "./components/BookList/BookList";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 interface Book {
   id: string;
@@ -13,10 +14,9 @@ interface Book {
   img: string;
 }
 
-function App() {
+const App: React.FC = () => {
   const [bookSearchResult, setBookSearchResult] = useState<Book[]>([]);
   const [isBookContainerVisible, setIsBookContainerVisible] = useState(false);
-  //
 
   // Handle book search
   const handleBookSearch = async () => {
@@ -30,14 +30,14 @@ function App() {
   };
 
   return (
-    <>
-      <NavigationBar />
-      <div className="contentBody">
-        <BookList isVisible={isBookContainerVisible} books={bookSearchResult} />
-        <button onClick={handleBookSearch}>TEST CALL</button>
-      </div>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home onClick={handleBookSearch} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
