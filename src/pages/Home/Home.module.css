@@ -1,0 +1,16 @@
+.contentBody {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 400px;
+    width: 100%;
+    top: 70px;
+    color: black;
+    position: relative;
+    align-items: center;
+}
+
+.contentBody button {
+    width: 200px;
+    color: white;
+}

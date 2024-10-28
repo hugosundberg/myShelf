@@ -11,12 +11,9 @@ interface Book {
 
 interface BookListProps {
   books: Book[];
-  isVisible: boolean;
 }
 
-const BookList = ({ books, isVisible }: BookListProps) => {
-  if (!isVisible) return null;
-
+const BookList = ({ books }: BookListProps) => {
   return (
     <div className={styles.bookList}>
       <div className={styles.bookCardContainer}>
