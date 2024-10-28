@@ -1,33 +1,33 @@
 import "./App.css";
 import booksAPI from "./services/booksAPI";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import SearchResult from "./pages/SearchResult/SearchResult";
-
-interface Book {
-  id: string;
-  title: string;
-  author: string | string[];
-  year: number;
-  img: string;
-  description: string;
-}
+import NavigationBar from "./components/NavigationBar/NavigationBar";
 
 const App: React.FC = () => {
   const [bookSearchResult, setBookSearchResult] = useState<Book[]>([]);
-
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    if (searchQuery) {
+      console.log(searchQuery);
+      handleBookSearch;
+    }
+  }, [searchQuery]);
+
+  const handleSetSearchQuery = (value: string) => {
+    setSearchQuery(value);
+  };
 
   // Handle book search
   const handleBookSearch = async () => {
     try {
-      const books = await booksAPI.fetchBooks();
+      const books = await booksAPI.fetchBooks({ searchQuery });
       setBookSearchResult(books);
-
-      console.log(searchQuery + ": ");
       console.log(bookSearchResult);
     } catch (error) {
       console.error("Error fetching books: ", error);
@@ -36,8 +36,12 @@ const App: React.FC = () => {
 
   return (
     <Router>
+      <NavigationBar
+        handleSetSearchQuery={handleSetSearchQuery}
+        handleBookSearch={handleBookSearch}
+      />
       <Routes>
-        <Route path="/" element={<Home onClick={handleBookSearch} />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route

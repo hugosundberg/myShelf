@@ -1,11 +1,9 @@
 const BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-const fetchBooks = async (): Promise<Book[]> => {
-  const query = "1q84";
-
+const fetchBooks = async ({ searchQuery }: SearchProps): Promise<Book[]> => {
   try {
-    const response = await fetch(`${BASE_URL}${query}&key=${API_KEY}`);
+    const response = await fetch(`${BASE_URL}${searchQuery}&key=${API_KEY}`);
     const data = await response.json();
 
     console.log(data);

@@ -5,4 +5,8 @@ interface Book {
     year: number;
     img: string;
     description: string;
-  }
+}
+
+interface SearchProps {
+  searchQuery: string;
+}
