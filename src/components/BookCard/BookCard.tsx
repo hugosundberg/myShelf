@@ -2,27 +2,36 @@ import styles from "./BookCard.module.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { BsHeart } from "react-icons/bs";
 import { BsHeartFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 interface BookProps {
   book: Book;
+  setCurrentBook: (book: Book) => void;
 }
 
-const fill = () => {};
+export const BookCard = ({ book, setCurrentBook }: BookProps) => {
+  const navigate = useNavigate();
 
-export const BookCard = ({ book }: BookProps) => {
+  const handleBookClick = (book: Book) => {
+    setCurrentBook(book);
+    navigate("/book");
+  };
+
+  const handleAuthorClick = () => {};
+
   return (
     <div className={styles.bookCard}>
       <div className={styles.imageContainer}>
         <img src={book.img} className={styles.bookImg} alt="book cover image" />
       </div>
       <div className={styles.bookCardContent}>
-        <h2>{book.title}</h2>
+        <h2 onClick={() => handleBookClick(book)}>{book.title}</h2>
         <p>
           <strong>{book.author}</strong>
         </p>
         <p>{book.description}</p>
       </div>
-      <button className={styles.likeButton} onClick={fill}>
+      <button className={styles.likeButton} onClick={() => console.log("like")}>
         <BsHeart className={styles.heart} />
       </button>
     </div>

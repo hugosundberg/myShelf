@@ -26,6 +26,11 @@
     line-height: 1.5em; 
 }
 
+.bookCard h2:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .bookCard p {
     padding: 0;
     margin: 0;

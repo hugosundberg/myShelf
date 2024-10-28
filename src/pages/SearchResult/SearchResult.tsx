@@ -14,17 +14,19 @@ interface Book {
 interface SearchResultProps {
   searchTerm: string;
   searchResult: Book[];
+  setCurrentBook: (book: Book) => void;
 }
 
 const SearchResult: React.FC<SearchResultProps> = ({
   searchTerm,
   searchResult,
+  setCurrentBook,
 }: SearchResultProps) => {
   return (
     <>
       <div className={styles.contentBody}>
         <h2>Results for: {searchTerm}</h2>
-        <BookList books={searchResult} />
+        <BookList books={searchResult} setCurrentBook={setCurrentBook} />
       </div>
     </>
   );
