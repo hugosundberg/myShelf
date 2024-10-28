@@ -1,7 +1,12 @@
 import "./App.css";
 import booksAPI from "./services/booksAPI";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
@@ -15,7 +20,6 @@ const App: React.FC = () => {
   useEffect(() => {
     if (searchQuery) {
       console.log(searchQuery);
-      handleBookSearch;
     }
   }, [searchQuery]);
 
@@ -28,7 +32,6 @@ const App: React.FC = () => {
     try {
       const books = await booksAPI.fetchBooks({ searchQuery });
       setBookSearchResult(books);
-      console.log(bookSearchResult);
     } catch (error) {
       console.error("Error fetching books: ", error);
     }

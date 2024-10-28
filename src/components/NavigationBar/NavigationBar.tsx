@@ -22,7 +22,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   };
 
   const handleSearch = () => {
-    handleBookSearch;
+    handleBookSearch();
     navigate("/search");
   };
 
@@ -35,6 +35,11 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           placeholder="Books, authors, etc."
           value={input}
           onChange={handleChange}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && input) {
+              handleSearch();
+            }
+          }}
           className={styles.searchBar}
         ></input>
         <IoSearchOutline className={styles.searchIcon} onClick={handleSearch} />
