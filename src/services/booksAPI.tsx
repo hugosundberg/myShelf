@@ -7,6 +7,7 @@ interface Book {
   author: string | string[];
   year: number;
   img: string;
+  description: string;
 }
 
 const fetchBooks = async (): Promise<Book[]> => {
@@ -16,6 +17,8 @@ const fetchBooks = async (): Promise<Book[]> => {
     const response = await fetch(`${BASE_URL}${query}&key=${API_KEY}`);
     const data = await response.json();
 
+    console.log(data);
+
     const books: Book[] = data.items.map((book: any) => ({
       id: book.id,
       title: book.volumeInfo.title || "No title available",
@@ -24,6 +27,7 @@ const fetchBooks = async (): Promise<Book[]> => {
         ? parseInt(book.volumeInfo.publishedDate.split("-")[0])
         : 0,
       img: book.volumeInfo.imageLinks?.thumbnail || "",
+      description: book.volumeInfo.description,
     }));
 
     console.log(books);

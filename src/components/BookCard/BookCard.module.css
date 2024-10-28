@@ -1,12 +1,10 @@
 .bookCard {
     background-color: white;
-    width: 100%;
-    height: 180px;
+    height: 150px;
     border-radius: 20px;
     padding: 20px;
     display: flex;
     flex-direction: row;
-    align-items: center;
     color: var(--primary-color);
     position: relative; 
     border: var(--secondary-color) solid 2px;
@@ -22,13 +20,10 @@
     font-size: medium;
     padding: 0;
     margin: 0;
-    text-align: left;
-    display: -webkit-box;         
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;        
+    text-align: left;             
     overflow: hidden;             
     max-height: 3em;              
-    line-height: 1.5em;           
+    line-height: 1.5em; 
 }
 
 .bookCard p {
@@ -36,12 +31,13 @@
     margin: 0;
     font-size: 14px;
     display: -webkit-box;         
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;        
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 3;  
+    max-width: 80%;    
     overflow: hidden;             
-    max-height: 3em;              
+    max-height: 4.5em;              
     line-height: 1.5em;  
-
+    margin-top: 5px;
 }
 
 .bookImg {
@@ -53,8 +49,7 @@
 
 .likeButton {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    right: 0px;
     cursor: pointer; 
     background-color: transparent;
 }

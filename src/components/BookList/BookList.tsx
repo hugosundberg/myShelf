@@ -7,6 +7,7 @@ interface Book {
   author: string | string[];
   year: number;
   img: string;
+  description: string;
 }
 
 interface BookListProps {

@@ -1,14 +1,16 @@
 .bookList {
+    display: flex;
     align-items: center;
+    justify-content: center;
     width: 100%;
 }
 
 .bookCardContainer {
     background-color: var(--accent-color);
+    padding: 40px;
+    width: 100%;
+    max-width: 1000px;
     gap: 15px;
-    align-items: center;
-    justify-content: center;
-    max-width: 800px;
     padding-top: 30px;
     padding-bottom: 30px;
 }

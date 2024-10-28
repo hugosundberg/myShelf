@@ -9,6 +9,7 @@ interface Book {
   author: string | string[];
   year: number;
   img: string;
+  description: string;
 }
 
 interface BookProps {
@@ -25,11 +26,14 @@ export const BookCard = ({ book }: BookProps) => {
       </div>
       <div className={styles.bookCardContent}>
         <h2>{book.title}</h2>
-        <p>{book.author}</p>
-        <button className={styles.likeButton} onClick={fill}>
-          <BsHeart className={styles.heart} />
-        </button>
+        <p>
+          <strong>{book.author}</strong>
+        </p>
+        <p>{book.description}</p>
       </div>
+      <button className={styles.likeButton} onClick={fill}>
+        <BsHeart className={styles.heart} />
+      </button>
     </div>
   );
 };
