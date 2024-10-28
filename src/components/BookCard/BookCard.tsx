@@ -3,15 +3,6 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { BsHeart } from "react-icons/bs";
 import { BsHeartFill } from "react-icons/bs";
 
-interface Book {
-  id: string;
-  title: string;
-  author: string | string[];
-  year: number;
-  img: string;
-  description: string;
-}
-
 interface BookProps {
   book: Book;
 }

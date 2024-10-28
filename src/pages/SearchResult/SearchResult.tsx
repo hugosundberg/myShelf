@@ -22,15 +22,12 @@ const SearchResult: React.FC<SearchResultProps> = ({
   searchTerm,
   searchResult,
 }: SearchResultProps) => {
-  const navigate = useNavigate();
-
   return (
     <>
       <NavigationBar />
       <div className={styles.contentBody}>
         <h2>Results for: {searchTerm}</h2>
         <BookList books={searchResult} />
-        <button onClick={() => navigate("/")}>Test</button>
       </div>
     </>
   );

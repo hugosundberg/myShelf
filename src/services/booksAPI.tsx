@@ -1,15 +1,6 @@
 const BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-interface Book {
-  id: string;
-  title: string;
-  author: string | string[];
-  year: number;
-  img: string;
-  description: string;
-}
-
 const fetchBooks = async (): Promise<Book[]> => {
   const query = "1q84";
 

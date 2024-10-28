@@ -1,15 +1,6 @@
 import { BookCard } from "../BookCard/BookCard";
 import styles from "./BookList.module.css";
 
-interface Book {
-  id: string;
-  title: string;
-  author: string | string[];
-  year: number;
-  img: string;
-  description: string;
-}
-
 interface BookListProps {
   books: Book[];
 }
