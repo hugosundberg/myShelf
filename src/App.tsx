@@ -17,12 +17,6 @@ const App: React.FC = () => {
   const [bookSearchResult, setBookSearchResult] = useState<Book[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    if (searchQuery) {
-      console.log(searchQuery);
-    }
-  }, [searchQuery]);
-
   const handleSetSearchQuery = (value: string) => {
     setSearchQuery(value);
   };
