@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./NavigationBar.module.css";
 import { useState, ChangeEvent } from "react";
 import { IoSearchOutline } from "react-icons/io5";
+import { PiBooksLight } from "react-icons/pi";
 
 interface NavigationBarProps {
   handleSetSearchQuery: (query: string) => void;
@@ -28,7 +29,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
   return (
     <div className={styles.navBar}>
-      <h2 onClick={() => navigate("/")}>MyShelf</h2>
+      <div className={styles.logoContainer}>
+        <PiBooksLight className={styles.logo} />
+        <h2 onClick={() => navigate("/")}>MyShelf</h2>
+      </div>
       <div className={styles.searchContainer}>
         <input
           type="text"

@@ -45,6 +45,11 @@
     margin-top: 5px;
 }
 
+.author:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .bookImg {
     border-radius: 5px;
     height: 150px;

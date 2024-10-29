@@ -1,5 +1,18 @@
+.logoContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.logoContainer:hover {
+    scale: 1.05;
+    cursor: pointer;
+}
+
 .logo {
-    font-size: 25px;
+    font-size: 40px;
 }
 
 .searchBar {

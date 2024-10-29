@@ -9,4 +9,5 @@ interface Book {
 
 interface SearchProps {
   searchQuery: string;
+  currentAuthor: string;
 }

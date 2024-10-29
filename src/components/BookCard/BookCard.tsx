@@ -7,9 +7,14 @@ import { useNavigate } from "react-router-dom";
 interface BookProps {
   book: Book;
   setCurrentBook: (book: Book) => void;
+  setCurrentAuthor: (author: string) => void;
 }
 
-export const BookCard = ({ book, setCurrentBook }: BookProps) => {
+export const BookCard = ({
+  book,
+  setCurrentBook,
+  setCurrentAuthor,
+}: BookProps) => {
   const navigate = useNavigate();
 
   const handleBookClick = (book: Book) => {
@@ -17,7 +22,10 @@ export const BookCard = ({ book, setCurrentBook }: BookProps) => {
     navigate("/book");
   };
 
-  const handleAuthorClick = () => {};
+  const handleAuthorClick = (book: Book) => {
+    const author = Array.isArray(book.author) ? book.author[0] : book.author;
+    setCurrentAuthor(author);
+  };
 
   return (
     <div className={styles.bookCard}>
@@ -26,7 +34,7 @@ export const BookCard = ({ book, setCurrentBook }: BookProps) => {
       </div>
       <div className={styles.bookCardContent}>
         <h2 onClick={() => handleBookClick(book)}>{book.title}</h2>
-        <p>
+        <p className={styles.author} onClick={() => handleAuthorClick(book)}>
           <strong>{book.author}</strong>
         </p>
         <p>{book.description}</p>
