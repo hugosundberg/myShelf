@@ -9,6 +9,7 @@ import SearchResult from "./pages/SearchResult/SearchResult";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Book from "./pages/Book/Book";
 import Login from "./pages/Login/Login";
+import Account from "./pages/Account/Account";
 
 const App: React.FC = () => {
   const [bookSearchResult, setBookSearchResult] = useState<Book[]>([]);
@@ -71,6 +72,7 @@ const App: React.FC = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/book" element={<Book currentBook={currentBook} />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/account" element={<Account />} />
 
         <Route
           path="/search"

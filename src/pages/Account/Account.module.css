@@ -1,0 +1,16 @@
+.contentBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} 
+
+.userInfo {
+    position: relative;
+    top: 170px;
+    width: 400px;
+    height: fit-content;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: white;
+    color: black;
+}
