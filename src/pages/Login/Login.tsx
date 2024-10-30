@@ -10,6 +10,7 @@ const Login: React.FC = () => {
   const GoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
+      console.log(result.user);
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +22,7 @@ const Login: React.FC = () => {
         <div className={styles.loginContainer}>
           <h2>Login</h2>
           <p>Sign in using one of the providers</p>
-          <button className={styles.loginButton}>
+          <button className={styles.loginButton} onClick={GoogleLogin}>
             <h3>
               <FcGoogle className={styles.googleIcon} />
               Log in using Google
