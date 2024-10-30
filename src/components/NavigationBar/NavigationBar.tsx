@@ -57,7 +57,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         {user && (
           <>
             <button>My Books</button>
-            <button onClick={() => navigate("/login")}>Account</button>
+            <button onClick={() => navigate("/login")}>
+              Account
+              <img src={user.photoURL || ""} className={styles.userAvatar} />
+            </button>
           </>
         )}
       </div>

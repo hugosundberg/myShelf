@@ -57,4 +57,12 @@
 
 .navMenu button {
     border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.userAvatar {
+    border-radius: 100px;
+    height: 30px;
 }
