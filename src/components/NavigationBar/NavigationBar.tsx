@@ -3,6 +3,8 @@ import styles from "./NavigationBar.module.css";
 import { useState, ChangeEvent } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { PiBooksLight } from "react-icons/pi";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../utils/firebase";
 
 interface NavigationBarProps {
   handleSetSearchQuery: (query: string) => void;
@@ -15,6 +17,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 }) => {
   const navigate = useNavigate();
   const [input, setInput] = useState("");
+
+  const [user, loading] = useAuthState(auth);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -49,8 +53,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         <IoSearchOutline className={styles.searchIcon} onClick={handleSearch} />
       </div>
       <div className={styles.navMenu}>
-        <button>My Books</button>
-        <button onClick={() => navigate("/login")}>Account</button>
+        {!user && <button onClick={() => navigate("/login")}>Sign Up</button>}
+        {user && (
+          <>
+            <button>My Books</button>
+            <button onClick={() => navigate("/login")}>Account</button>
+          </>
+        )}
       </div>
     </div>
   );
