@@ -50,7 +50,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
       </div>
       <div className={styles.navMenu}>
         <button>My Books</button>
-        <button>Account</button>
+        <button onClick={() => navigate("/login")}>Account</button>
       </div>
     </div>
   );
