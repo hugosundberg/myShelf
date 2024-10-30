@@ -2,7 +2,7 @@ import styles from "./Login.module.css";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../../utils/firebase.js";
+import { auth } from "../../utils/firebase";
 
 const Login: React.FC = () => {
   // Sign in with google
