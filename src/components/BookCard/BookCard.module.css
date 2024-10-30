@@ -50,6 +50,16 @@
     text-decoration: underline;
 }
 
+.noBookImgContainer {
+    height: 130px;
+    width: 65px;
+    background-color: black;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 12px;
+}
+
 .bookImg {
     border-radius: 5px;
     height: 150px;

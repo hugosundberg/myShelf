@@ -30,7 +30,16 @@ export const BookCard = ({
   return (
     <div className={styles.bookCard}>
       <div className={styles.imageContainer}>
-        <img src={book.img} className={styles.bookImg} alt="book cover image" />
+        {book.img && (
+          <img
+            src={book.img}
+            className={styles.bookImg}
+            alt="book cover image"
+          />
+        )}
+        {!book.img && (
+          <div className={styles.noBookImgContainer}>{book.title}</div>
+        )}
       </div>
       <div className={styles.bookCardContent}>
         <h2 onClick={() => handleBookClick(book)}>{book.title}</h2>
