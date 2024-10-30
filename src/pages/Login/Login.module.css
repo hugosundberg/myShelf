@@ -18,7 +18,7 @@
     color: black;
 }
 
-.loginContainer h2 {
+.loginContainer h2, p {
     margin-left: 10px;
 }
 
@@ -26,7 +26,8 @@
     width: 400px;
     display: flex;
     justify-content: left;
-    margin: 10px
+    margin: 10px;
+    align-items: center;
 }
 
 .googleIcon {
