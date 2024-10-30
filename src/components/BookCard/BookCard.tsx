@@ -46,6 +46,7 @@ export const BookCard = ({
         <p className={styles.author} onClick={() => handleAuthorClick(book)}>
           <strong>{book.author}</strong>
         </p>
+        <p>{book.category}</p>
         <p>{book.description}</p>
       </div>
       <button className={styles.likeButton} onClick={() => console.log("like")}>

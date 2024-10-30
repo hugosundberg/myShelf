@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 const BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
 const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -23,9 +21,10 @@ const fetchBooks = async ({
         : 0,
       img: book.volumeInfo.imageLinks?.thumbnail || "",
       description: book.volumeInfo.description,
+      category: book.volumeInfo.categories?.join(", ") || "No category",
     }));
 
-    console.log(books);
+    console.log("Structured JSON: ", books);
 
     return books;
   } catch (error) {
@@ -54,6 +53,7 @@ const fetchAuthor = async ({
           : 0,
         img: book.volumeInfo.imageLinks?.thumbnail || "",
         description: book.volumeInfo.description || "No description available",
+        category: book.volumeInfo.categories?.join(", ") || "No category",
       })) || [];
 
     return books;

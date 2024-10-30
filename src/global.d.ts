@@ -5,6 +5,7 @@ interface Book {
     year: number;
     img: string;
     description: string;
+    category: string;
 }
 
 interface SearchProps {
