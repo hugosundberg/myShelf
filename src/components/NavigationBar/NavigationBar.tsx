@@ -53,7 +53,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         <IoSearchOutline className={styles.searchIcon} onClick={handleSearch} />
       </div>
       <div className={styles.navMenu}>
-        {!user && <button onClick={() => navigate("/login")}>Sign Up</button>}
+        {!user && <button onClick={() => navigate("/login")}>Sign In</button>}
         {user && (
           <>
             <button>My Books</button>
