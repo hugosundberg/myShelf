@@ -1,14 +1,12 @@
+import { useAuthState } from "react-firebase-hooks/auth";
 import styles from "./BookCard.module.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { BsHeart } from "react-icons/bs";
 import { BsHeartFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-
-interface BookProps {
-  book: Book;
-  setCurrentBook: (book: Book) => void;
-  setCurrentAuthor: (author: string) => void;
-}
+import { auth, db } from "../../utils/firebase";
+import { useState } from "react";
+import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
 
 export const BookCard = ({
   book,
@@ -16,6 +14,8 @@ export const BookCard = ({
   setCurrentAuthor,
 }: BookProps) => {
   const navigate = useNavigate();
+  const [user, loading] = useAuthState(auth);
+  const [isLiked, setIsLiked] = useState(false);
 
   const handleBookClick = (book: Book) => {
     setCurrentBook(book);
@@ -25,6 +25,39 @@ export const BookCard = ({
   const handleAuthorClick = (book: Book) => {
     const author = Array.isArray(book.author) ? book.author[0] : book.author;
     setCurrentAuthor(author);
+  };
+
+  const handleBookLike = async () => {
+    // TODO: Add popup when unauth user clicks like
+    if (!user) return; // Add popup
+    const userBooksRef = doc(db, "users", user.uid, "books", book.id);
+
+    console.log(userBooksRef);
+
+    try {
+      if (!isLiked) {
+        await setDoc(userBooksRef, {});
+        setIsLiked(true);
+      } else {
+        await deleteDoc(userBooksRef);
+        setIsLiked(false);
+      }
+    } catch (error) {
+      console.error("Error adding/removing book from Firestore: ", error);
+    }
+  };
+
+  const checkIfBookIsLiked = async () => {
+    // TODO: Add popup when unauth user clicks like
+    if (!user) return;
+    const userBooksRef = doc(db, "users", user.uid, "books", book.id);
+
+    try {
+      const docSnapshot = await getDoc(userBooksRef);
+      setIsLiked(docSnapshot.exists());
+    } catch (error) {
+      console.error("Error checking if book is liked: ", error);
+    }
   };
 
   return (
@@ -49,7 +82,7 @@ export const BookCard = ({
         <p>{book.category}</p>
         <p>{book.description}</p>
       </div>
-      <button className={styles.likeButton} onClick={() => console.log("like")}>
+      <button className={styles.likeButton} onClick={() => handleBookLike()}>
         <BsHeart className={styles.heart} />
       </button>
     </div>

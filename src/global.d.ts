@@ -18,3 +18,9 @@ interface UserProfile {
   name: string;
   email: string;
 }
+
+interface BookProps {
+  book: Book;
+  setCurrentBook: (book: Book) => void;
+  setCurrentAuthor: (author: string) => void;
+}
