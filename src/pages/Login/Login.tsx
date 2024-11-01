@@ -1,56 +1,80 @@
 import styles from "./Login.module.css";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../../utils/firebase";
-import { Navigate, useNavigate } from "react-router-dom";
+import { GoogleAuthProvider, signInWithPopup, User } from "firebase/auth";
+import { auth, db } from "../../utils/firebase";
+import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useEffect } from "react";
+import { setDoc, doc } from "firebase/firestore";
 
 const Login: React.FC = () => {
-  // Sign in with google
+  const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) navigate("/account");
+  }, [user, navigate]);
+
+  const handleAddUser = async (user: User) => {
+    try {
+      // Use setDoc to create or update the user document
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+      });
+    } catch (error) {
+      console.error("Error adding user to Firestore:", error);
+    }
+  };
+
+  // Sign in with Google
   const googleProvider = new GoogleAuthProvider();
   const GoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      console.log(result.user);
+      if (result.user) {
+        await handleAddUser(result.user); // Ensure user is added to Firestore
+        navigate("/account");
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Google sign-in error:", error);
     }
   };
-  const navigate = useNavigate();
 
-  const [user, loading] = useAuthState(auth);
-
-  if (user) navigate("/account");
+  // Placeholder for Facebook login
+  const FacebookLogin = () => {
+    console.log("Facebook login is not yet implemented.");
+  };
 
   return (
-    <>
-      <div className={styles.contentBody}>
+    <div className={styles.contentBody}>
+      {loading ? (
+        <div className={styles.spinnerDiv}>
+          <span className={styles.loader}></span>
+        </div>
+      ) : (
         <div className={styles.loginContainer}>
           <h2>Login</h2>
           <p>Sign in using one of the providers</p>
-          <button
-            className={styles.loginButton}
-            onClick={() => {
-              GoogleLogin();
-              navigate("/account");
-            }}
-          >
+          <button className={styles.loginButton} onClick={GoogleLogin}>
             <h3>
               <FcGoogle className={styles.googleIcon} />
               Sign in using Google
             </h3>
           </button>
 
-          <button className={styles.loginButton}>
+          <button className={styles.loginButton} onClick={FacebookLogin}>
             <h3>
               <FaFacebook className={styles.facebookIcon} />
               Sign in using Facebook
             </h3>
           </button>
         </div>
-      </div>
-    </>
+      )}
+    </div>
   );
 };
 

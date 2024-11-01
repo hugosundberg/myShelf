@@ -2,7 +2,7 @@ import styles from "./Account.module.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../utils/firebase";
 import { Navigate, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Popup from "./Popup";
 
 const Account: React.FC = () => {
@@ -19,8 +19,11 @@ const Account: React.FC = () => {
     setIsPopupVisible(false);
   };
 
+  useEffect(() => {
+    if (!user) navigate("/login");
+  }, [user]);
+
   if (loading) return <h1>Loading...</h1>;
-  if (!user) navigate("/login");
   return (
     <>
       <Popup isOpen={isPopupVisible} onConfirm={onDelete} onCancel={onCancel} />

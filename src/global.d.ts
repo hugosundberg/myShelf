@@ -12,3 +12,9 @@ interface SearchProps {
   searchQuery: string;
   currentAuthor: string;
 }
+
+interface UserProfile {
+  uid: string;
+  name: string;
+  email: string;
+}
