@@ -24,3 +24,10 @@ interface BookProps {
   setCurrentBook: (book: Book) => void;
   setCurrentAuthor: (author: string) => void;
 }
+
+interface SearchResultProps {
+  searchTerm: string;
+  searchResult: Book[];
+  setCurrentBook: (book: Book) => void;
+  setCurrentAuthor: (author: string) => void;
+}

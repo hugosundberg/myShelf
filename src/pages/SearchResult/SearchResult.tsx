@@ -2,13 +2,6 @@ import React from "react";
 import styles from "./SearchResult.module.css";
 import BookList from "../../components/BookList/BookList";
 
-interface SearchResultProps {
-  searchTerm: string;
-  searchResult: Book[];
-  setCurrentBook: (book: Book) => void;
-  setCurrentAuthor: (author: string) => void;
-}
-
 const SearchResult: React.FC<SearchResultProps> = ({
   searchTerm,
   searchResult,

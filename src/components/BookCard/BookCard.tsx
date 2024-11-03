@@ -5,7 +5,7 @@ import { BsHeart } from "react-icons/bs";
 import { BsHeartFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../utils/firebase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
 
 export const BookCard = ({
@@ -16,6 +16,10 @@ export const BookCard = ({
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
   const [isLiked, setIsLiked] = useState(false);
+
+  useEffect(() => {
+    if (user) checkIfBookIsLiked();
+  }, [user]);
 
   const handleBookClick = (book: Book) => {
     setCurrentBook(book);
@@ -32,11 +36,15 @@ export const BookCard = ({
     if (!user) return; // Add popup
     const userBooksRef = doc(db, "users", user.uid, "books", book.id);
 
-    console.log(userBooksRef);
-
     try {
       if (!isLiked) {
-        await setDoc(userBooksRef, {});
+        await setDoc(userBooksRef, {
+          title: book.title,
+          author: book.author,
+          img: book.img,
+          category: book.category,
+          description: book.description,
+        });
         setIsLiked(true);
       } else {
         await deleteDoc(userBooksRef);

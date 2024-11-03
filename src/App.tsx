@@ -10,6 +10,7 @@ import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Book from "./pages/Book/Book";
 import Login from "./pages/Login/Login";
 import Account from "./pages/Account/Account";
+import MyBooks from "./pages/MyBooks/MyBooks";
 
 const App: React.FC = () => {
   const [bookSearchResult, setBookSearchResult] = useState<Book[]>([]);
@@ -73,6 +74,15 @@ const App: React.FC = () => {
         <Route path="/book" element={<Book currentBook={currentBook} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Account />} />
+        <Route
+          path="/my-books"
+          element={
+            <MyBooks
+              setCurrentBook={setCurrentBook}
+              setCurrentAuthor={setCurrentAuthor}
+            />
+          }
+        />
 
         <Route
           path="/search"
