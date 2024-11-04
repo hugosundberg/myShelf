@@ -3,9 +3,17 @@ import styles from "./MyBooks.module.css";
 import { auth, db } from "../../utils/firebase";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { BookCard } from "../../components/BookCard/BookCard";
+import { SmallBookCard } from "../../components/SmallBookCard/SmallBookCard";
 
-const MyBooks: React.FC = ({ setCurrentAuthor, setCurrentBook }) => {
+interface MyBooksProps {
+  setCurrentBook: (book: Book) => void;
+  setCurrentAuthor: (author: string) => void;
+}
+
+const MyBooks: React.FC<MyBooksProps> = ({
+  setCurrentAuthor,
+  setCurrentBook,
+}) => {
   const [user, loading] = useAuthState(auth);
   const [userBooks, setUserBooks] = useState<Book[]>([]);
 
@@ -38,8 +46,8 @@ const MyBooks: React.FC = ({ setCurrentAuthor, setCurrentBook }) => {
   return (
     <>
       <div className={styles.contentBody}>
+        <h1>My Collection</h1>
         <div className={styles.collectionBody}>
-          <h1>My Collection</h1>
           {!userBooks && (
             <h3>
               You have no saved books. Try searching for one of your favorites!
@@ -48,7 +56,7 @@ const MyBooks: React.FC = ({ setCurrentAuthor, setCurrentBook }) => {
 
           {userBooks &&
             userBooks.map((book, index) => (
-              <BookCard
+              <SmallBookCard
                 key={`${book.id}-${index}`}
                 book={book}
                 setCurrentBook={setCurrentBook}

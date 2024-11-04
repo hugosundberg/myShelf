@@ -1,0 +1,82 @@
+.bookCard {
+    background-color: white;
+    height: 200px;
+    width: 400px;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    color: var(--primary-color);
+    position: relative; 
+    border: var(--secondary-color) solid 2px;
+}
+
+.bookCardContent {
+    margin-left: 10px;
+    position: relative;
+    width: 100%;
+}
+
+.bookCard h2 {
+    font-size: medium;
+    padding: 0;
+    margin: 0;
+    text-align: left;             
+    overflow: hidden;             
+    max-height: 3em;              
+    line-height: 1.5em; 
+}
+
+.bookCard h2:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.bookCard p {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    display: -webkit-box;         
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 3;  
+    max-width: 80%;    
+    overflow: hidden;             
+    max-height: 4.5em;              
+    line-height: 1.5em;  
+    margin-top: 5px;
+}
+
+.author:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.noBookImgContainer {
+    height: 130px;
+    width: 65px;
+    background-color: black;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 12px;
+}
+
+.bookImg {
+    border-radius: 5px;
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.likeButton {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    cursor: pointer; 
+    background-color: transparent;
+}
+
+.heart {
+    color: black;
+    scale: 1.5;
+}
+
+
