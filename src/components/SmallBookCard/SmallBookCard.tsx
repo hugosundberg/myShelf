@@ -90,7 +90,8 @@ export const SmallBookCard = ({
         <p>{book.category}</p>
       </div>
       <button className={styles.likeButton} onClick={() => handleBookLike()}>
-        <BsHeart className={styles.heart} />
+        {!isLiked && <BsHeart className={styles.heart} />}
+        {isLiked && <BsHeartFill className={styles.heart} />}
       </button>
     </div>
   );
