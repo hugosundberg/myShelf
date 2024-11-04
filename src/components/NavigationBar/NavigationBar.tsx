@@ -33,36 +33,50 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
   return (
     <div className={styles.navBar}>
-      <div className={styles.logoContainer}>
-        <PiBooksLight className={styles.logo} />
-        <h2 onClick={() => navigate("/")}>MyShelf</h2>
+      <div className={styles.upperNav}>
+        <div className={styles.logoContainer}>
+          <PiBooksLight className={styles.logo} />
+          <h2 onClick={() => navigate("/")}>MyShelf</h2>
+        </div>
+        <div className={styles.searchContainer}>
+          <input
+            type="text"
+            placeholder="Books, authors, etc."
+            value={input}
+            onChange={handleChange}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && input) {
+                handleSearch();
+              }
+            }}
+            className={styles.searchBar}
+          ></input>
+          <IoSearchOutline
+            className={styles.searchIcon}
+            onClick={handleSearch}
+          />
+        </div>
+        <div className={styles.navMenu}>
+          {!user && <button onClick={() => navigate("/login")}>Sign In</button>}
+          {user && (
+            <>
+              <button onClick={() => navigate("/my-books")}>My Books</button>
+              <button onClick={() => navigate("/account")}>
+                Account
+                <img src={user.photoURL || ""} className={styles.userAvatar} />
+              </button>
+            </>
+          )}
+        </div>
       </div>
-      <div className={styles.searchContainer}>
-        <input
-          type="text"
-          placeholder="Books, authors, etc."
-          value={input}
-          onChange={handleChange}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && input) {
-              handleSearch();
-            }
-          }}
-          className={styles.searchBar}
-        ></input>
-        <IoSearchOutline className={styles.searchIcon} onClick={handleSearch} />
-      </div>
-      <div className={styles.navMenu}>
-        {!user && <button onClick={() => navigate("/login")}>Sign In</button>}
-        {user && (
-          <>
-            <button onClick={() => navigate("/my-books")}>My Books</button>
-            <button onClick={() => navigate("/account")}>
-              Account
-              <img src={user.photoURL || ""} className={styles.userAvatar} />
-            </button>
-          </>
-        )}
+      <div className={styles.lowerNav}>
+        <ul>
+          <li>Books</li>
+          <li>Bestsellers</li>
+          <li>Fiction</li>
+          <li>Non-Fiction</li>
+          <li>Children</li>
+        </ul>
       </div>
     </div>
   );

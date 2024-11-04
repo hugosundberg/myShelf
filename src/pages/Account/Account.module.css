@@ -9,17 +9,10 @@
     top: 170px;
     width: fit-content;
     height: fit-content;
-    padding-inline: 30px;
-    padding-bottom: 20px;
+    padding: 30px;
     border-radius: 20px;
     background-color: white;
     color: black;
-}
-
-.userInfo p {
-    padding: 0px;
-    margin: 0px;
-    margin-bottom: 10px;
 }
 
 .userInfoHeader {

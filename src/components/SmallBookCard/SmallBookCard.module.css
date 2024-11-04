@@ -66,6 +66,10 @@
     object-fit: cover; 
 }
 
+.bookImg:hover {
+    cursor: pointer;
+}
+
 .likeButton {
     position: absolute;
     bottom: 0px;

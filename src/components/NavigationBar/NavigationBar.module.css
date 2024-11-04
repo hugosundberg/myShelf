@@ -38,13 +38,39 @@
     top: 12px;
 }
 
+.upperNav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    height: 70px;
+}
+
+.lowerNav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-color);
+    height: 50px;
+}
+
+.lowerNav li {
+    list-style: none;
+    font-size: larger;
+}
+
+.lowerNav ul {
+    display: flex;
+    gap: 40px;
+}
+
 .navBar {
     background-color: var(--primary-color);
     position: fixed;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 30px;
     width: 100%;
     top: 0;
     z-index: 1000;

@@ -76,10 +76,16 @@ export const SmallBookCard = ({
             src={book.img}
             className={styles.bookImg}
             alt="book cover image"
+            onClick={() => handleBookClick(book)}
           />
         )}
         {!book.img && (
-          <div className={styles.noBookImgContainer}>{book.title}</div>
+          <div
+            className={styles.noBookImgContainer}
+            onClick={() => handleBookClick(book)}
+          >
+            {book.title}
+          </div>
         )}
       </div>
       <div className={styles.bookCardContent}>

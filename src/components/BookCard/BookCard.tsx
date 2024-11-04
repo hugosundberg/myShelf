@@ -1,8 +1,7 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import styles from "./BookCard.module.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { BsHeart } from "react-icons/bs";
-import { BsHeartFill } from "react-icons/bs";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../utils/firebase";
 import { useEffect, useState } from "react";

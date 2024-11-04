@@ -1,21 +1,19 @@
 .contentBody {
     width: 100%;
     position: relative;
-    top: 70px;
+    top: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--primary-color);
+    background-color: var(--accent-color2);
 }
 
 .collectionBody {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
-    align-items: center;
     justify-content: center;
-    background-color: var(--primary-color);
     width: 600px;
     padding-bottom: 20px;
 }

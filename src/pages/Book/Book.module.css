@@ -1,8 +1,8 @@
 .contentBody {
-    background-color: white;
+    background-color: var(--primary-color);
     width: 100%;
     height: 100vh;
-    top: 70px;
+    top: 120px;
     position: relative;
     color: black;
     display: flex;
@@ -10,11 +10,47 @@
     align-items: center;
 }
 
+.infoHeader {
+    display: flex;
+    gap: 20px;
+}
+
+h2 {
+    margin: 0;
+    max-width: 400px;
+}
+
+h3 {
+    margin: 0;
+}
+
+img {
+    height: 100%;
+}
+
+.likeContainer {
+    display: flex;
+    align-items: center;
+}
+
+.likeButton {
+    cursor: pointer; 
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+
+
+.heart {
+    color: black;
+    scale: 1.5;
+}
+
 .bookContainer {
     height: fit-content;
     width: 600px;
-    border: var(--primary-color) solid 2px;
-    padding: 20px;
+    background-color: white;
+    padding: 30px;
     border-radius: 20px;
     margin-top: 40px;
 }
@@ -23,3 +59,4 @@ h3:hover {
     text-decoration: underline;
     cursor: pointer;
 }
+
