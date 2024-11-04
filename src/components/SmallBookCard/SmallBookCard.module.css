@@ -1,7 +1,7 @@
 .bookCard {
     background-color: white;
     height: 200px;
-    width: 400px;
+    width: 300px;
     border-radius: 20px;
     padding: 20px;
     display: flex;
@@ -22,7 +22,7 @@
     margin: 0;
     text-align: left;             
     overflow: hidden;             
-    max-height: 3em;              
+    max-height: 4.5em;              
     line-height: 1.5em; 
 }
 
@@ -35,9 +35,6 @@
     padding: 0;
     margin: 0;
     font-size: 14px;
-    display: -webkit-box;         
-    -webkit-box-orient: vertical; 
-    -webkit-line-clamp: 3;  
     max-width: 80%;    
     overflow: hidden;             
     max-height: 4.5em;              
@@ -72,8 +69,8 @@
 
 .likeButton {
     position: absolute;
-    bottom: 0px;
-    right: 0px;
+    bottom: 10px;
+    right: 10px;
     cursor: pointer; 
     background-color: transparent;
 }
