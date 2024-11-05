@@ -8,40 +8,36 @@ import { auth } from "../../utils/firebase";
 
 interface NavigationBarProps {
   handleSetSearchQuery: (query: string) => void;
-  handleBookSearch: () => void;
 }
 
 const NavigationBar: React.FC<NavigationBarProps> = ({
   handleSetSearchQuery,
-  handleBookSearch,
 }) => {
   const navigate = useNavigate();
   const [input, setInput] = useState("");
-
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInput(value);
-    handleSetSearchQuery(value);
+    setInput(e.target.value);
   };
 
   const handleSearch = () => {
-    handleBookSearch();
-    navigate("/search");
+    if (!input) return;
+    handleSetSearchQuery(input);
   };
 
   return (
     <div className={styles.navBar}>
       <div className={styles.upperNav}>
-        <div className={styles.logoContainer}>
+        <div className={styles.logoContainer} onClick={() => navigate("/")}>
           <PiBooksLight className={styles.logo} />
-          <h2 onClick={() => navigate("/")}>MyShelf</h2>
+          <h2>MyShelf</h2>
         </div>
         <div className={styles.searchContainer}>
           <input
             type="text"
             placeholder="Books, authors, etc."
+            aria-label="Search for books or authors"
             value={input}
             onChange={handleChange}
             onKeyDown={(e) => {
@@ -50,20 +46,25 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               }
             }}
             className={styles.searchBar}
-          ></input>
+          />
           <IoSearchOutline
             className={styles.searchIcon}
             onClick={handleSearch}
           />
         </div>
         <div className={styles.navMenu}>
-          {!user && <button onClick={() => navigate("/login")}>Sign In</button>}
-          {user && (
+          {!user ? (
+            <button onClick={() => navigate("/login")}>Sign In</button>
+          ) : (
             <>
               <button onClick={() => navigate("/my-books")}>My Books</button>
               <button onClick={() => navigate("/account")}>
                 Account
-                <img src={user.photoURL || ""} className={styles.userAvatar} />
+                <img
+                  src={user.photoURL || ""}
+                  alt="User Avatar"
+                  className={styles.userAvatar}
+                />
               </button>
             </>
           )}

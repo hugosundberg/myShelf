@@ -17,6 +17,7 @@ const App: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentBook, setCurrentBook] = useState<Book>();
   const [currentAuthor, setCurrentAuthor] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSetSearchQuery = (value: string) => {
     setSearchQuery(value);
@@ -38,40 +39,49 @@ const App: React.FC = () => {
     }
   }, [currentAuthor]);
 
-  // Handle book search
-  const handleBookSearch = async () => {
-    setBookSearchResult([]);
+  useEffect(() => {
+    if (!searchQuery) return; // Do not search if query is empty
 
-    try {
-      const books = await booksAPI.fetchBooks({ searchQuery });
-      setBookSearchResult(books);
-    } catch (error) {
-      console.error("Error fetching books: ", error);
-    }
-  };
+    const handleBookSearch = async () => {
+      setBookSearchResult([]);
+      setLoading(true);
+
+      try {
+        const books = await booksAPI.fetchBooks({ searchQuery });
+        setBookSearchResult(books);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching books: ", error);
+        setLoading(false);
+      } finally {
+        console.log(searchQuery);
+      }
+    };
+    handleBookSearch();
+  }, [searchQuery]);
 
   const handleAuthorSearch = async () => {
     setBookSearchResult([]);
+    setLoading(true);
 
     try {
       const books = await booksAPI.fetchAuthor({ currentAuthor });
       setBookSearchResult(books);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching books: ", error);
+      setLoading(false);
     }
   };
 
   return (
     <Router>
-      <NavigationBar
-        handleSetSearchQuery={handleSetSearchQuery}
-        handleBookSearch={handleBookSearch}
-      />
+      <NavigationBar handleSetSearchQuery={handleSetSearchQuery} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/book" element={<Book currentBook={currentBook} />} />
+        <Route path="/book" element={<Book book={currentBook} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Account />} />
         <Route
@@ -92,6 +102,7 @@ const App: React.FC = () => {
               setCurrentAuthor={handleSetCurrentAuthor}
               searchTerm={searchQuery}
               searchResult={bookSearchResult}
+              loading={loading}
             />
           }
         />

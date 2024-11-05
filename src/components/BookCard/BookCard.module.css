@@ -69,7 +69,7 @@
 
 .likeButton {
     position: absolute;
-    right: 0px;
+    right: 20px;
     top: 20px;
     padding: 0;
     width: 20px;
@@ -80,6 +80,11 @@
 
 .heart {
     color: black;
+    scale: 1.5;
+}
+
+.heartActive {
+    color: red;
     scale: 1.5;
 }
 

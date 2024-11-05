@@ -13,8 +13,6 @@ const fetchBooks = async ({
     );
     const data = await response.json();
 
-    console.log(data);
-
     const books: Book[] = data.items.map((book: any) => ({
       id: book.id,
       title: book.volumeInfo.title || "No title available",
@@ -26,8 +24,6 @@ const fetchBooks = async ({
       description: book.volumeInfo.description,
       category: book.volumeInfo.categories?.join(", ") || "No category",
     }));
-
-    console.log("Structured JSON: ", books);
 
     return books;
   } catch (error) {

@@ -4,7 +4,7 @@ interface Book {
     author: string | string[];
     year: number;
     img: string;
-    description: string;
+    description?: string;
     category: string;
 }
 
@@ -30,4 +30,5 @@ interface SearchResultProps {
   searchResult: Book[];
   setCurrentBook: (book: Book) => void;
   setCurrentAuthor: (author: string) => void;
+  loading: boolean
 }

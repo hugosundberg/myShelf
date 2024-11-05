@@ -43,6 +43,7 @@ export const BookCard = ({
           img: book.img,
           category: book.category,
           description: book.description,
+          rating: 0,
         });
         setIsLiked(true);
       } else {
@@ -91,7 +92,7 @@ export const BookCard = ({
       </div>
       <button className={styles.likeButton} onClick={() => handleBookLike()}>
         {!isLiked && <BsHeart className={styles.heart} />}
-        {isLiked && <BsHeartFill className={styles.heart} />}
+        {isLiked && <BsHeartFill className={styles.heartActive} />}
       </button>
     </div>
   );
