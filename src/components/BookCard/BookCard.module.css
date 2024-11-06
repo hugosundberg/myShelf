@@ -20,6 +20,7 @@
     font-size: medium;
     padding: 0;
     margin: 0;
+    max-width: 600px;
     text-align: left;             
     overflow: hidden;             
     max-height: 3em;              
@@ -67,6 +68,10 @@
     object-fit: cover; 
 }
 
+.bookImg:hover {
+    cursor: pointer;
+}
+
 .likeButton {
     position: absolute;
     right: 20px;
@@ -84,7 +89,7 @@
 }
 
 .heartActive {
-    color: red;
+    color: rgb(183, 0, 0);
     scale: 1.5;
 }
 

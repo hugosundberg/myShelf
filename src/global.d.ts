@@ -6,6 +6,7 @@ interface Book {
     img: string;
     description?: string;
     category: string;
+    rating: number;
 }
 
 interface SearchProps {

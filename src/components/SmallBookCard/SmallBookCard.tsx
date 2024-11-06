@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../utils/firebase";
 import { useEffect, useState } from "react";
 import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import Rating from "../../components/RatingComponent/RatingComponent";
 
 export const SmallBookCard = ({
   book,
@@ -29,6 +30,7 @@ export const SmallBookCard = ({
   const handleAuthorClick = (book: Book) => {
     const author = Array.isArray(book.author) ? book.author[0] : book.author;
     setCurrentAuthor(author);
+    navigate("/search");
   };
 
   const handleBookLike = async () => {
@@ -94,11 +96,17 @@ export const SmallBookCard = ({
           <strong>{book.author}</strong>
         </p>
         <p>{book.category}</p>
+        <div className={styles.ratingLikeContainer}>
+          <Rating value={book.rating} />
+          <button
+            className={styles.likeButton}
+            onClick={() => handleBookLike()}
+          >
+            {!isLiked && <BsHeart className={styles.heart} />}
+            {isLiked && <BsHeartFill className={styles.heartActive} />}
+          </button>
+        </div>
       </div>
-      <button className={styles.likeButton} onClick={() => handleBookLike()}>
-        {!isLiked && <BsHeart className={styles.heart} />}
-        {isLiked && <BsHeartFill className={styles.heartActive} />}
-      </button>
     </div>
   );
 };

@@ -24,6 +24,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   const handleSearch = () => {
     if (!input) return;
     handleSetSearchQuery(input);
+    navigate("/search");
   };
 
   return (

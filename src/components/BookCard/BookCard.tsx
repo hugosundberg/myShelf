@@ -76,6 +76,7 @@ export const BookCard = ({
             src={book.img}
             className={styles.bookImg}
             alt="book cover image"
+            onClick={() => handleBookClick(book)}
           />
         )}
         {!book.img && (

@@ -35,7 +35,6 @@ const App: React.FC = () => {
   useEffect(() => {
     if (currentAuthor !== "") {
       handleAuthorSearch();
-      setCurrentAuthor("");
     }
   }, [currentAuthor]);
 
@@ -81,7 +80,12 @@ const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/book" element={<Book book={currentBook} />} />
+        <Route
+          path="/book"
+          element={
+            <Book book={currentBook} setCurrentAuthor={setCurrentAuthor} />
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Account />} />
         <Route
