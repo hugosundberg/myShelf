@@ -21,7 +21,7 @@ export const BookCard = ({
   }, [user]);
 
   const handleBookClick = (book: Book) => {
-    setCurrentBook(book);
+    if (setCurrentBook) setCurrentBook(book);
     navigate("/book");
   };
 
@@ -44,6 +44,7 @@ export const BookCard = ({
           category: book.category,
           description: book.description,
           rating: 0,
+          isLiked: true,
         });
         setIsLiked(true);
       } else {

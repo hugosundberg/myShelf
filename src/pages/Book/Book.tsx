@@ -60,6 +60,7 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
           img: book.img,
           category: book.category,
           description: book.description,
+          isLiked: true,
         });
         setIsLiked(true);
       } else {
