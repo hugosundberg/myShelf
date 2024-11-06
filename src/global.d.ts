@@ -22,7 +22,7 @@ interface UserProfile {
 
 interface BookProps {
   book: Book;
-  setCurrentBook: (book: Book) => void;
+  setCurrentBook?: (book: Book) => void;
   setCurrentAuthor: (author: string) => void;
 }
 

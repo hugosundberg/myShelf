@@ -15,7 +15,7 @@ import MyBooks from "./pages/MyBooks/MyBooks";
 const App: React.FC = () => {
   const [bookSearchResult, setBookSearchResult] = useState<Book[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [currentBook, setCurrentBook] = useState<Book>();
+  const [currentBook, setCurrentBook] = useState<Book | null>(null);
   const [currentAuthor, setCurrentAuthor] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -83,9 +83,17 @@ const App: React.FC = () => {
         <Route
           path="/book"
           element={
-            <Book book={currentBook} setCurrentAuthor={setCurrentAuthor} />
+            currentBook ? (
+              <Book
+                book={currentBook}
+                setCurrentAuthor={handleSetCurrentAuthor}
+              />
+            ) : (
+              <p>No book selected.</p>
+            )
           }
         />
+
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Account />} />
         <Route

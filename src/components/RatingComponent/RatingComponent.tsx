@@ -7,8 +7,6 @@ interface RatingProps {
 
 export default function HalfRating({ handleRating, value }: RatingProps) {
   if (!handleRating) {
-    console.log("small");
-
     return (
       <Rating
         name="read-only"
