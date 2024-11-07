@@ -57,13 +57,18 @@ export const BookCard = ({
   };
 
   const checkIfBookIsLiked = async () => {
-    // TODO: Add popup when unauth user clicks like
     if (!user) return;
-    const userBooksRef = doc(db, "users", user.uid, "books", book.id);
 
     try {
-      const docSnapshot = await getDoc(userBooksRef);
-      setIsLiked(docSnapshot.exists());
+      const userBookRef = doc(db, "users", user.uid, "books", book.id);
+      const docSnapshot = await getDoc(userBookRef);
+
+      // Check if the document exists and has isLiked set to true
+      if (docSnapshot.exists() && docSnapshot.data().isLiked === true) {
+        setIsLiked(true);
+      } else {
+        setIsLiked(false);
+      }
     } catch (error) {
       console.error("Error checking if book is liked: ", error);
     }

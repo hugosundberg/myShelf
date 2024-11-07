@@ -2,9 +2,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import styles from "./MyBooks.module.css";
 import { auth, db } from "../../utils/firebase";
 import { useEffect, useState } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { SmallBookCard } from "../../components/SmallBookCard/SmallBookCard";
-import { CircularProgress } from "@mui/material";
 
 interface MyBooksProps {
   setCurrentBook: (book: Book) => void;
@@ -57,6 +56,9 @@ const MyBooks: React.FC<MyBooksProps> = ({
   return (
     <>
       <div className={styles.contentBody}>
+        <div>
+          <h2>Sort</h2>
+        </div>
         {userLikedBooks.length > 0 ? (
           <h1>My Collection</h1>
         ) : (
@@ -75,22 +77,21 @@ const MyBooks: React.FC<MyBooksProps> = ({
               />
             ))}
         </div>
-        {userRatedBooks.length > 0 ? (
-          <div className={styles.ratedBooks}>
-            <h2>Rated Books</h2>
-
-            {userRatedBooks &&
-              userRatedBooks.map((book, index) => (
-                <SmallBookCard
-                  key={`${book.id}-${index}`}
-                  book={book}
-                  setCurrentBook={setCurrentBook}
-                  setCurrentAuthor={setCurrentAuthor}
-                />
-              ))}
-          </div>
-        ) : (
-          <h3>No books rated</h3>
+        {userRatedBooks.length > 0 && (
+          <>
+            <h2>Not in your collection</h2>
+            <div className={styles.ratedBooks}>
+              {userRatedBooks &&
+                userRatedBooks.map((book, index) => (
+                  <SmallBookCard
+                    key={`${book.id}-${index}`}
+                    book={book}
+                    setCurrentBook={setCurrentBook}
+                    setCurrentAuthor={setCurrentAuthor}
+                  />
+                ))}
+            </div>
+          </>
         )}
       </div>
     </>
