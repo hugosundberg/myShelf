@@ -3,7 +3,7 @@ import styles from "./Book.module.css";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { db, auth } from "../../utils/firebase";
-import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import Rating from "../../components/RatingComponent/RatingComponent";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +11,6 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   const [isLiked, setIsLiked] = useState(false);
   const [user, loading] = useAuthState(auth);
   const [rating, setRating] = useState<number | null>(null);
-  const [isCheckingLikeStatus, setIsCheckingLikeStatus] = useState(true);
   const navigate = useNavigate();
 
   const handleSetRating = (number: number | null) => {
@@ -29,14 +28,27 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
 
     const userBooksRef = doc(db, "users", user.uid, "books", book.id);
     try {
-      await setDoc(userBooksRef, {
-        title: book.title,
-        author: book.author,
-        img: book.img,
-        category: book.category,
-        description: book.description,
-        rating: number,
-      });
+      if (isLiked) {
+        await setDoc(userBooksRef, {
+          title: book.title,
+          author: book.author,
+          img: book.img,
+          category: book.category,
+          description: book.description,
+          rating: number,
+          isLiked: true,
+        });
+      } else {
+        await setDoc(userBooksRef, {
+          title: book.title,
+          author: book.author,
+          img: book.img,
+          category: book.category,
+          description: book.description,
+          rating: number,
+          isLiked: false,
+        });
+      }
     } catch (error) {
       console.error("Error setting rating: ", error);
     }
@@ -50,47 +62,65 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
 
   const handleBookLike = async () => {
     if (!user) return;
+
     const userBooksRef = doc(db, "users", user.uid, "books", book.id);
 
     try {
-      if (!isLiked) {
+      const docSnapshot = await getDoc(userBooksRef);
+
+      if (docSnapshot.exists()) {
+        if (isLiked) {
+          if (book.rating !== 0) {
+            await updateDoc(userBooksRef, { isLiked: false });
+          } else {
+            await deleteDoc(userBooksRef);
+          }
+          setIsLiked(false);
+        } else {
+          await updateDoc(userBooksRef, { isLiked: true });
+          setIsLiked(true);
+        }
+      } else {
         await setDoc(userBooksRef, {
           title: book.title,
           author: book.author,
           img: book.img,
           category: book.category,
           description: book.description,
+          rating: book.rating || 0,
           isLiked: true,
         });
         setIsLiked(true);
-      } else {
-        await deleteDoc(userBooksRef);
-        setIsLiked(false);
       }
     } catch (error) {
-      console.error("Error adding/removing book from Firestore: ", error);
+      console.error("Error handling book like/unlike in Firestore:", error);
     }
   };
 
   useEffect(() => {
     if (user) {
-      setIsCheckingLikeStatus(true);
       checkIfBookIsLiked();
     }
   }, [user, book.id]);
 
   const checkIfBookIsLiked = async () => {
     if (!user) return;
-    const userBooksRef = doc(db, "users", user.uid, "books", book.id);
 
     try {
-      const docSnapshot = await getDoc(userBooksRef);
-      setIsLiked(docSnapshot.exists());
+      const userBookRef = doc(db, "users", user.uid, "books", book.id);
+      const docSnapshot = await getDoc(userBookRef);
+
+      // Check if the document exists and has isLiked set to true
+      if (docSnapshot.exists() && docSnapshot.data().isLiked === true) {
+        setIsLiked(true);
+      } else {
+        setIsLiked(false);
+      }
     } catch (error) {
       console.error("Error checking if book is liked: ", error);
-    } finally {
-      setIsCheckingLikeStatus(false);
     }
+
+    console.log(isLiked);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -110,18 +140,17 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
               <strong>Category: </strong>
               {book.category}
             </p>
-            {!isCheckingLikeStatus &&
-              (!isLiked ? (
-                <button className={styles.likeButton} onClick={handleBookLike}>
-                  <BsHeart className={styles.heart} />
-                  <p>Add to my books</p>
-                </button>
-              ) : (
-                <button className={styles.likeButton} onClick={handleBookLike}>
-                  <BsHeartFill className={styles.heartActive} />
-                  <p>Remove from my collection</p>
-                </button>
-              ))}
+            {!isLiked ? (
+              <button className={styles.likeButton} onClick={handleBookLike}>
+                <BsHeart className={styles.heart} />
+                <p>Add to my books</p>
+              </button>
+            ) : (
+              <button className={styles.likeButton} onClick={handleBookLike}>
+                <BsHeartFill className={styles.heartActive} />
+                <p>Remove from my collection</p>
+              </button>
+            )}
             <div className={styles.ratingContainer}>
               <p>
                 <strong>Your rating: </strong>

@@ -27,34 +27,25 @@ const MyBooks: React.FC<MyBooksProps> = ({
       setLoading(true);
 
       try {
-        // Use a query constraint to only get books where isLiked is true
-        const booksCollectionRef = collection(db, "users", user.uid, "books");
-        const likedBooksQuery = query(
-          booksCollectionRef,
-          where("isLiked", "==", true)
-        );
-        const ratedBooksQuery = query(
-          booksCollectionRef,
-          where("isLiked", "==", false)
-        );
+        const booksCollectionsRef = collection(db, "users", user.uid, "books");
 
-        const likedQuerySnapshot = await getDocs(likedBooksQuery);
-        const ratedQuerySnapshot = await getDocs(ratedBooksQuery);
+        const querySnapshot = await getDocs(booksCollectionsRef);
 
-        const userLikedBooks: Book[] = likedQuerySnapshot.docs.map((doc) => ({
+        const allBooks = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         })) as Book[];
 
-        const userRatedBooks: Book[] = ratedQuerySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as Book[];
+        const likedBooks = allBooks.filter((book) => book.isLiked === true);
 
-        setUserLikedBooks(userLikedBooks);
-        setUserRatedBooks(userRatedBooks);
+        const ratedBooks = allBooks.filter(
+          (book) => book.isLiked === false && book.rating !== undefined
+        );
+
+        setUserLikedBooks(likedBooks);
+        setUserRatedBooks(ratedBooks);
       } catch (error) {
-        console.error("Error fetching user books", error);
+        console.error("Error fetching books", error);
       } finally {
         setLoading(false);
       }
@@ -85,7 +76,7 @@ const MyBooks: React.FC<MyBooksProps> = ({
             ))}
         </div>
         {userRatedBooks.length > 0 ? (
-          <div>
+          <div className={styles.ratedBooks}>
             <h2>Rated Books</h2>
 
             {userRatedBooks &&

@@ -7,7 +7,7 @@ interface Book {
     description?: string;
     category: string;
     rating: number;
-    liked: boolean;
+    isLiked: boolean;
 }
 
 interface SearchProps {

@@ -1,12 +1,11 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import styles from "./SmallBookCard.module.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { BsHeart } from "react-icons/bs";
-import { BsHeartFill } from "react-icons/bs";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../utils/firebase";
 import { useEffect, useState } from "react";
-import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, deleteDoc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import Rating from "../../components/RatingComponent/RatingComponent";
 
 export const SmallBookCard = ({
@@ -34,37 +33,55 @@ export const SmallBookCard = ({
   };
 
   const handleBookLike = async () => {
-    // TODO: Add popup when unauth user clicks like
-    if (!user) return; // Add popup
+    if (!user) return;
+
     const userBooksRef = doc(db, "users", user.uid, "books", book.id);
 
     try {
-      if (!isLiked) {
+      const docSnapshot = await getDoc(userBooksRef);
+
+      if (docSnapshot.exists()) {
+        if (isLiked) {
+          if (book.rating !== 0) {
+            await updateDoc(userBooksRef, { isLiked: false });
+          } else {
+            await deleteDoc(userBooksRef);
+          }
+          setIsLiked(false);
+        } else {
+          await updateDoc(userBooksRef, { isLiked: true });
+          setIsLiked(true);
+        }
+      } else {
         await setDoc(userBooksRef, {
           title: book.title,
           author: book.author,
           img: book.img,
           category: book.category,
           description: book.description,
+          rating: book.rating || 0,
+          isLiked: true,
         });
         setIsLiked(true);
-      } else {
-        await deleteDoc(userBooksRef);
-        setIsLiked(false);
       }
     } catch (error) {
-      console.error("Error adding/removing book from Firestore: ", error);
+      console.error("Error handling book like/unlike in Firestore:", error);
     }
   };
 
   const checkIfBookIsLiked = async () => {
-    // TODO: Add popup when unauth user clicks like
     if (!user) return;
-    const userBooksRef = doc(db, "users", user.uid, "books", book.id);
 
     try {
-      const docSnapshot = await getDoc(userBooksRef);
-      setIsLiked(docSnapshot.exists());
+      const userBookRef = doc(db, "users", user.uid, "books", book.id);
+      const docSnapshot = await getDoc(userBookRef);
+
+      // Check if the document exists and has isLiked set to true
+      if (docSnapshot.exists() && docSnapshot.data().isLiked === true) {
+        setIsLiked(true);
+      } else {
+        setIsLiked(false);
+      }
     } catch (error) {
       console.error("Error checking if book is liked: ", error);
     }
@@ -102,8 +119,11 @@ export const SmallBookCard = ({
             className={styles.likeButton}
             onClick={() => handleBookLike()}
           >
-            {!isLiked && <BsHeart className={styles.heart} />}
-            {isLiked && <BsHeartFill className={styles.heartActive} />}
+            {!isLiked ? (
+              <BsHeart className={styles.heart} />
+            ) : (
+              <BsHeartFill className={styles.heartActive} />
+            )}
           </button>
         </div>
       </div>
