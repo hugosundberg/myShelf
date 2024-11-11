@@ -4,6 +4,7 @@ import { auth, db } from "../../utils/firebase";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { SmallBookCard } from "../../components/SmallBookCard/SmallBookCard";
+import { CircularProgress } from "@mui/material";
 
 interface MyBooksProps {
   setCurrentBook: (book: Book) => void;
@@ -56,15 +57,16 @@ const MyBooks: React.FC<MyBooksProps> = ({
   return (
     <>
       <div className={styles.contentBody}>
-        {userLikedBooks.length > 0 ? (
-          <h1>My Collection</h1>
-        ) : (
-          <h3>
-            You have no saved books. Try searching for one of your favorites!
-          </h3>
+        <h1>My Collection</h1>
+        {loading && (
+          <CircularProgress
+            color="inherit"
+            style={{ position: "absolute", top: "200px", padding: 0 }}
+          />
         )}
+
         <div className={styles.collectionBody}>
-          {userLikedBooks &&
+          {userLikedBooks.length > 0 ? (
             userLikedBooks.map((book, index) => (
               <SmallBookCard
                 key={`${book.id}-${index}`}
@@ -72,7 +74,12 @@ const MyBooks: React.FC<MyBooksProps> = ({
                 setCurrentBook={setCurrentBook}
                 setCurrentAuthor={setCurrentAuthor}
               />
-            ))}
+            ))
+          ) : (
+            <h3>
+              You have no saved books. Try searching for one of your favorites!
+            </h3>
+          )}
         </div>
         {userRatedBooks.length > 0 && (
           <>

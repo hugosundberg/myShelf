@@ -1,11 +1,15 @@
 .contentBody {
     display: flex;
     flex-direction: column;
-    background-color: white;
     height: 400px;
     width: 100%;
     top: 120px;
-    color: black;
+    color: white;
     position: relative;
     align-items: center;
+}
+
+.pagination {
+    margin-top: 0px;
+    padding: 20px;
 }

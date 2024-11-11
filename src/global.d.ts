@@ -32,5 +32,8 @@ interface SearchResultProps {
   searchResult: Book[];
   setCurrentBook: (book: Book) => void;
   setCurrentAuthor: (author: string) => void;
-  loading: boolean
+  loading: boolean;
+  setStartIndex: (value: number) => void;
+  currentPage: number;
+  setCurrentPage: (value: number) => void;
 }

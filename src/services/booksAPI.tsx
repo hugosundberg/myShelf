@@ -1,11 +1,12 @@
 const BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
 const API_KEY = import.meta.env.VITE_API_KEY;
 const maxResults = 20;
-const startIndex = 0;
 const fetchBooks = async ({
   searchQuery,
+  startIndex,
 }: {
   searchQuery: string;
+  startIndex: number;
 }): Promise<Book[]> => {
   try {
     const response = await fetch(

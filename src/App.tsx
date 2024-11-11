@@ -17,6 +17,8 @@ const App: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentBook, setCurrentBook] = useState<Book | null>(null);
   const [currentAuthor, setCurrentAuthor] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [startIndex, setStartIndex] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const handleSetSearchQuery = (value: string) => {
@@ -41,12 +43,14 @@ const App: React.FC = () => {
   useEffect(() => {
     if (!searchQuery) return; // Do not search if query is empty
 
+    console.log(startIndex);
+
     const handleBookSearch = async () => {
       setBookSearchResult([]);
       setLoading(true);
 
       try {
-        const books = await booksAPI.fetchBooks({ searchQuery });
+        const books = await booksAPI.fetchBooks({ searchQuery, startIndex });
         setBookSearchResult(books);
         setLoading(false);
       } catch (error) {
@@ -57,7 +61,7 @@ const App: React.FC = () => {
       }
     };
     handleBookSearch();
-  }, [searchQuery]);
+  }, [searchQuery, startIndex]);
 
   const handleAuthorSearch = async () => {
     setBookSearchResult([]);
@@ -115,6 +119,9 @@ const App: React.FC = () => {
               searchTerm={searchQuery}
               searchResult={bookSearchResult}
               loading={loading}
+              setStartIndex={setStartIndex}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
             />
           }
         />

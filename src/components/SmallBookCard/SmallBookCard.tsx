@@ -15,6 +15,7 @@ export const SmallBookCard = ({
 }: BookProps) => {
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
+  const [rating, setRating] = useState<number>();
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {

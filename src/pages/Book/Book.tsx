@@ -10,25 +10,22 @@ import { useNavigate } from "react-router-dom";
 const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   const [isLiked, setIsLiked] = useState(false);
   const [user, loading] = useAuthState(auth);
-  const [rating, setRating] = useState<number | null>(null);
+  const [rating, setRating] = useState<number>(0); // Initialize with a default value
   const navigate = useNavigate();
 
-  const handleSetRating = (number: number | null) => {
+  const handleSetRating = (number: number) => {
     setRating(number);
   };
 
-  const handleRating = async (number: number | null) => {
-    if (!user || number === null) return;
-
-    if (book.rating === number) {
-      handleSetRating(0);
-    } else {
-      handleSetRating(number);
-    }
+  const handleRating = async (number: number) => {
+    if (!user) return;
 
     const userBooksRef = doc(db, "users", user.uid, "books", book.id);
+
     try {
       if (isLiked) {
+        await updateDoc(userBooksRef, { rating: number });
+      } else {
         await setDoc(userBooksRef, {
           title: book.title,
           author: book.author,
@@ -38,23 +35,15 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
           rating: number,
           isLiked: true,
         });
-      } else {
-        await setDoc(userBooksRef, {
-          title: book.title,
-          author: book.author,
-          img: book.img,
-          category: book.category,
-          description: book.description,
-          rating: number,
-          isLiked: false,
-        });
+        setIsLiked(true);
       }
+      handleSetRating(number);
     } catch (error) {
       console.error("Error setting rating: ", error);
     }
   };
 
-  const handleAuthorClick = (book: Book) => {
+  const handleAuthorClick = () => {
     const author = Array.isArray(book.author) ? book.author[0] : book.author;
     setCurrentAuthor(author);
     navigate("/search");
@@ -66,20 +55,13 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
     const userBooksRef = doc(db, "users", user.uid, "books", book.id);
 
     try {
-      const docSnapshot = await getDoc(userBooksRef);
-
-      if (docSnapshot.exists()) {
-        if (isLiked) {
-          if (book.rating !== 0) {
-            await updateDoc(userBooksRef, { isLiked: false });
-          } else {
-            await deleteDoc(userBooksRef);
-          }
-          setIsLiked(false);
+      if (isLiked) {
+        if (rating !== 0) {
+          await updateDoc(userBooksRef, { isLiked: false });
         } else {
-          await updateDoc(userBooksRef, { isLiked: true });
-          setIsLiked(true);
+          await deleteDoc(userBooksRef);
         }
+        setIsLiked(false);
       } else {
         await setDoc(userBooksRef, {
           title: book.title,
@@ -87,7 +69,7 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
           img: book.img,
           category: book.category,
           description: book.description,
-          rating: book.rating || 0,
+          rating: rating,
           isLiked: true,
         });
         setIsLiked(true);
@@ -110,17 +92,14 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
       const userBookRef = doc(db, "users", user.uid, "books", book.id);
       const docSnapshot = await getDoc(userBookRef);
 
-      // Check if the document exists and has isLiked set to true
-      if (docSnapshot.exists() && docSnapshot.data().isLiked === true) {
-        setIsLiked(true);
-      } else {
-        setIsLiked(false);
+      if (docSnapshot.exists()) {
+        const data = docSnapshot.data();
+        setIsLiked(data.isLiked === true);
+        if (data.rating !== undefined) handleSetRating(data.rating);
       }
     } catch (error) {
       console.error("Error checking if book is liked: ", error);
     }
-
-    console.log(isLiked);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -132,7 +111,7 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
           <img src={book.img} alt={book.title} />
           <div>
             <h2>{book.title}</h2>
-            <h3 onClick={() => handleAuthorClick(book)}>{book.author}</h3>
+            <h3 onClick={handleAuthorClick}>{book.author}</h3>
             <p>
               <strong>Published:</strong> {book.year}
             </p>

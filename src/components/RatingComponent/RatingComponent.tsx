@@ -1,7 +1,7 @@
 import Rating from "@mui/material/Rating";
 
 interface RatingProps {
-  handleRating?: (rating: number | null) => void;
+  handleRating: (rating: number) => void;
   value: number;
 }
 

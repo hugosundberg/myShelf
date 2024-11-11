@@ -8,6 +8,8 @@
     color: var(--primary-color);
     position: relative; 
     border: var(--secondary-color) solid 2px;
+    width: 1000px;
+    max-width: 80%;
 }
 
 .bookCardContent {
