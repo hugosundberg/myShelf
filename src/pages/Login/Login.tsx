@@ -66,12 +66,12 @@ const Login: React.FC = () => {
             </h3>
           </button>
 
-          <button className={styles.loginButton} onClick={FacebookLogin}>
+          {/* <button className={styles.loginButton} onClick={FacebookLogin}>
             <h3>
               <FaFacebook className={styles.facebookIcon} />
               Sign in using Facebook
             </h3>
-          </button>
+          </button> */}
         </div>
       )}
     </div>

@@ -56,9 +56,6 @@ const MyBooks: React.FC<MyBooksProps> = ({
   return (
     <>
       <div className={styles.contentBody}>
-        <div>
-          <h2>Sort</h2>
-        </div>
         {userLikedBooks.length > 0 ? (
           <h1>My Collection</h1>
         ) : (
