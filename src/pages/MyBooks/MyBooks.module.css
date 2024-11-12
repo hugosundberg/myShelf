@@ -1,6 +1,3 @@
-
-
-
 .contentBody {
     width: 100%;
     position: relative;
@@ -32,4 +29,14 @@
 
 .customDropdown {
     height: 400px;
+}
+
+.sortContainer {
+    background-color: white;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
 }
