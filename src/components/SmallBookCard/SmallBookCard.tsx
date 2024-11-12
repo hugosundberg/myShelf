@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../utils/firebase";
 import { useEffect, useState } from "react";
 import { doc, deleteDoc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import Rating from "../../components/RatingComponent/RatingComponent";
+import HalfRating from "../../components/RatingComponent/RatingComponent";
 
 export const SmallBookCard = ({
   book,
@@ -115,7 +115,7 @@ export const SmallBookCard = ({
         </p>
         <p>{book.category}</p>
         <div className={styles.ratingLikeContainer}>
-          <Rating value={book.rating} />
+          <HalfRating value={book.rating} />
           <button
             className={styles.likeButton}
             onClick={() => handleBookLike()}

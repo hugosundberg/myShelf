@@ -1,36 +1,25 @@
 import Rating from "@mui/material/Rating";
 
 interface RatingProps {
-  handleRating: (rating: number) => void;
+  handleRating?: (rating: number) => void;
   value: number;
 }
 
-export default function HalfRating({ handleRating, value }: RatingProps) {
-  if (!handleRating) {
-    return (
-      <Rating
-        name="read-only"
-        size="small"
-        defaultValue={value}
-        precision={0.5}
-        readOnly
-      />
-    );
-  } else {
-    return (
-      <Rating
-        name="half-rating"
-        size="large"
-        defaultValue={value}
-        precision={0.5}
-        onChange={(e, newValue) => {
-          if (newValue === null) {
-            handleRating(0);
-          } else {
-            handleRating(newValue);
-          }
-        }}
-      />
-    );
-  }
-}
+const HalfRating = ({ handleRating, value }: RatingProps) => {
+  return (
+    <Rating
+      name={handleRating ? "half-rating" : "read-only"}
+      size={handleRating ? "large" : "small"}
+      value={value} // Use `value` to make this a controlled component
+      precision={0.5}
+      readOnly={!handleRating} // Set `readOnly` if no handleRating function is provided
+      onChange={(_e, newValue) => {
+        if (newValue !== null && handleRating) {
+          handleRating(newValue);
+        }
+      }}
+    />
+  );
+};
+
+export default HalfRating;

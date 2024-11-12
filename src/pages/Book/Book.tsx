@@ -6,6 +6,7 @@ import { db, auth } from "../../utils/firebase";
 import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import Rating from "../../components/RatingComponent/RatingComponent";
 import { useNavigate } from "react-router-dom";
+import HalfRating from "../../components/RatingComponent/RatingComponent";
 
 const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -33,9 +34,8 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
           category: book.category,
           description: book.description,
           rating: number,
-          isLiked: true,
+          isLiked: false,
         });
-        setIsLiked(true);
       }
       handleSetRating(number);
     } catch (error) {
@@ -82,8 +82,29 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   useEffect(() => {
     if (user) {
       checkIfBookIsLiked();
+      checkIfBookIsRated();
     }
   }, [user, book.id]);
+
+  useEffect(() => {
+    console.log(rating);
+  }, [rating]);
+
+  const checkIfBookIsRated = async () => {
+    if (!user) return;
+
+    try {
+      const userBookRef = doc(db, "users", user.uid, "books", book.id);
+      const docSnapshot = await getDoc(userBookRef);
+
+      if (docSnapshot.exists()) {
+        const data = docSnapshot.data();
+        setRating(data.rating);
+      }
+    } catch (error) {
+      console.error("Error checking if book is liked: ", error);
+    }
+  };
 
   const checkIfBookIsLiked = async () => {
     if (!user) return;
@@ -95,7 +116,6 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
       if (docSnapshot.exists()) {
         const data = docSnapshot.data();
         setIsLiked(data.isLiked === true);
-        if (data.rating !== undefined) handleSetRating(data.rating);
       }
     } catch (error) {
       console.error("Error checking if book is liked: ", error);
@@ -134,7 +154,8 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
               <p>
                 <strong>Your rating: </strong>
               </p>
-              <Rating handleRating={handleRating} value={book.rating} />
+              <HalfRating handleRating={handleRating} value={rating} />
+              <p>{rating}</p>
             </div>
           </div>
         </div>
