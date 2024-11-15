@@ -16,6 +16,11 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   const navigate = useNavigate();
   const [input, setInput] = useState("");
   const [user] = useAuthState(auth);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -32,7 +37,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
       <div className={styles.upperNav}>
         <div className={styles.logoContainer} onClick={() => navigate("/")}>
           <PiBooksLight className={styles.logo} />
-          <h2>MyShelf</h2>
+          <h2 className={styles.title}>MyShelf</h2>
         </div>
         <div className={styles.searchContainer}>
           <input
@@ -58,8 +63,16 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <button onClick={() => navigate("/login")}>Sign In</button>
           ) : (
             <>
-              <button onClick={() => navigate("/my-books")}>My Books</button>
-              <button onClick={() => navigate("/account")}>
+              <button
+                className={styles.myBooksButton}
+                onClick={() => navigate("/my-books")}
+              >
+                My Books
+              </button>
+              <button
+                className={styles.myAccountButton}
+                onClick={() => navigate("/account")}
+              >
                 Account
                 <img
                   src={user.photoURL || ""}
@@ -67,6 +80,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   className={styles.userAvatar}
                 />
               </button>
+              <div className={styles.hamburger} onClick={toggleMenu}>
+                {/* Hamburger Icon */}
+                <div className="line"></div>
+                <div className="line"></div>
+                <div className="line"></div>
+              </div>
             </>
           )}
         </div>

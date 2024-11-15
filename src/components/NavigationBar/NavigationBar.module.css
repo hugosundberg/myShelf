@@ -94,3 +94,62 @@
     border-radius: 100px;
     height: 30px;
 }
+
+.hamburger {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+}
+  
+.hamburger .line {
+    background-color: #333;
+    height: 3px;
+    width: 100%;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+  
+  /* Optional: Transform lines for open state */
+.menu.open .line:nth-child(1) {
+    transform: rotate(45deg) translateY(7px);
+}
+  
+.menu.open .line:nth-child(2) {
+    opacity: 0;
+}
+  
+.menu.open .line:nth-child(3) {
+    transform: rotate(-45deg) translateY(-7px);
+}
+  
+
+@media (max-width: 480px) {
+    .upperNav {
+        gap: 10px;
+    } 
+
+    .navMenu button {
+        display: none;
+    }
+
+    .myBooksButton {
+        display: none;
+    }
+
+    .myAccountButton {
+        display: none;
+    }
+
+    .searchBar {
+        width: 40px;
+    }
+
+    .title {
+        display: none;
+    }
+
+    
+}

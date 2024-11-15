@@ -94,10 +94,12 @@ const MyBooks: React.FC<MyBooksProps> = ({
             style={{ position: "absolute", top: "250px", padding: 0 }}
           />
         )}
-        <Sort
-          setSortOption={setSortOption}
-          setSortDirection={setSortDirection}
-        />
+        {userLikedBooks.length > 0 && (
+          <Sort
+            setSortOption={setSortOption}
+            setSortDirection={setSortDirection}
+          />
+        )}
 
         <div className={styles.collectionBody}>
           {sortedLikedBooks.length > 0 ? (

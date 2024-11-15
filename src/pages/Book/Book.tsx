@@ -59,8 +59,6 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
       return;
     }
 
-    console.log("Reviewed");
-
     const userBooksRef = doc(db, "users", user.uid, "books", book.id);
 
     try {
@@ -103,7 +101,7 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
 
     try {
       if (isLiked) {
-        if (rating !== 0) {
+        if (rating !== 0 || review !== "") {
           await updateDoc(userBooksRef, { isLiked: false });
         } else {
           await deleteDoc(userBooksRef);
@@ -202,6 +200,12 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
         </p>
         <p>{book.description}</p>
       </div>
+      {review !== "" && (
+        <div className={styles.reviewContainer}>
+          <h2>Your review</h2>
+          <p>{review}</p>
+        </div>
+      )}
       <ReviewPopup
         book={book}
         isOpen={isReviewOpen}

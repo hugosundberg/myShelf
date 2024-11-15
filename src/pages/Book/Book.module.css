@@ -88,3 +88,15 @@
     background-color: var(--primary-color);
 }
 
+.reviewContainer {
+    background-color: white;
+    width: 600px;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.reviewContainer h2 {
+    margin-top: 0;
+}
+
