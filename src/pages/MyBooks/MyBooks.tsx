@@ -90,6 +90,7 @@ const MyBooks: React.FC<MyBooksProps> = ({
           />
         )}
         <div className={styles.sortContainer}>
+          <p>Sort by: </p>
           <button onClick={() => setSortOption("author")}>Author</button>
           <button onClick={() => setSortOption("year")}>Year</button>
           <button onClick={() => setSortOption("rating")}>Rating</button>
