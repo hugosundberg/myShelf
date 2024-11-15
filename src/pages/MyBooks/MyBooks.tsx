@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { SmallBookCard } from "../../components/SmallBookCard/SmallBookCard";
 import { CircularProgress } from "@mui/material";
+import Sort from "../../components/SortComponent/Sort";
 
 interface MyBooksProps {
   setCurrentBook: (book: Book) => void;
@@ -20,6 +21,7 @@ const MyBooks: React.FC<MyBooksProps> = ({
   const [userRatedBooks, setUserRatedBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(false);
   const [sortOption, setSortOption] = useState<string>(""); // Sort state
+  const [sortDirection, setSortDirection] = useState<string>("");
 
   useEffect(() => {
     const fetchUserBooks = async () => {
@@ -55,10 +57,10 @@ const MyBooks: React.FC<MyBooksProps> = ({
   }, [user]);
 
   // Sorting function based on selected option
-  const sortBooks = (books: Book[], option: string) => {
-    switch (option) {
-      case "author":
-        return [...books].sort((a, b) => {
+  const sortBooks = (books: Book[], option: string, direction: string) => {
+    const sortedBooks = [...books].sort((a, b) => {
+      switch (option) {
+        case "author":
           const authorA = Array.isArray(a.author)
             ? a.author.join(", ")
             : a.author;
@@ -66,18 +68,21 @@ const MyBooks: React.FC<MyBooksProps> = ({
             ? b.author.join(", ")
             : b.author;
           return authorA.localeCompare(authorB);
-        });
-      case "year":
-        return [...books].sort((a, b) => (a.year || 0) - (b.year || 0));
-      case "rating":
-        return [...books].sort((a, b) => (b.rating || 0) - (a.rating || 0));
-      default:
-        return books;
-    }
+        case "year":
+          return (a.year || 0) - (b.year || 0);
+        case "rating":
+          return (b.rating || 0) - (a.rating || 0);
+        default:
+          return 0;
+      }
+    });
+
+    // Invert the sort order if direction is descending
+    return direction === "desc" ? sortedBooks.reverse() : sortedBooks;
   };
 
-  const sortedLikedBooks = sortBooks(userLikedBooks, sortOption);
-  const sortedRatedBooks = sortBooks(userRatedBooks, sortOption);
+  const sortedLikedBooks = sortBooks(userLikedBooks, sortOption, sortDirection);
+  const sortedRatedBooks = sortBooks(userRatedBooks, sortOption, sortDirection);
 
   return (
     <>
@@ -86,15 +91,14 @@ const MyBooks: React.FC<MyBooksProps> = ({
         {loading && (
           <CircularProgress
             color="inherit"
-            style={{ position: "absolute", top: "200px", padding: 0 }}
+            style={{ position: "absolute", top: "250px", padding: 0 }}
           />
         )}
-        <div className={styles.sortContainer}>
-          <p>Sort by: </p>
-          <button onClick={() => setSortOption("author")}>Author</button>
-          <button onClick={() => setSortOption("year")}>Year</button>
-          <button onClick={() => setSortOption("rating")}>Rating</button>
-        </div>
+        <Sort
+          setSortOption={setSortOption}
+          setSortDirection={setSortDirection}
+        />
+
         <div className={styles.collectionBody}>
           {sortedLikedBooks.length > 0 ? (
             sortedLikedBooks.map((book, index) => (

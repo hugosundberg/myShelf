@@ -1,0 +1,26 @@
+.sortContainer {
+    background-color: white;
+    width: 45 0px;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+}
+
+.sortContainer button {
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 10px;
+    background-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.sortContainer button.active {
+    background-color: black;
+    font-weight: bold;
+}
