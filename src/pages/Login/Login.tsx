@@ -1,6 +1,5 @@
 import styles from "./Login.module.css";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
 import { GoogleAuthProvider, signInWithPopup, User } from "firebase/auth";
 import { auth, db } from "../../utils/firebase";
 import { useNavigate } from "react-router-dom";
@@ -44,11 +43,6 @@ const Login: React.FC = () => {
     }
   };
 
-  // Placeholder for Facebook login
-  const FacebookLogin = () => {
-    console.log("Facebook login is not yet implemented.");
-  };
-
   return (
     <div className={styles.contentBody}>
       {loading ? (
@@ -65,13 +59,6 @@ const Login: React.FC = () => {
               Sign in using Google
             </h3>
           </button>
-
-          {/* <button className={styles.loginButton} onClick={FacebookLogin}>
-            <h3>
-              <FaFacebook className={styles.facebookIcon} />
-              Sign in using Facebook
-            </h3>
-          </button> */}
         </div>
       )}
     </div>

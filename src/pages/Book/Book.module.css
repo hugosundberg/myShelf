@@ -30,21 +30,18 @@
     margin-bottom: 10px;
 }
 
-
 .likeButton {
     display: flex;
     align-items: center;
-    margin-top: 20px;
-    margin-bottom: 10px;
     color: white;
-    border: black solid 2px;
     background-color: var(--primary-color);
     border-radius: 10px;
     width: fit-content;
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding-right: 25px;
     cursor: pointer; 
     gap: 15px;
-
 }
 
 .heart {
@@ -71,9 +68,23 @@
     cursor: pointer;
 }
 
+.bookButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
 .ratingContainer {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.reviewButton {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    background-color: var(--primary-color);
 }
 

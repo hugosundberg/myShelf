@@ -4,14 +4,17 @@ import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { db, auth } from "../../utils/firebase";
 import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import Rating from "../../components/RatingComponent/RatingComponent";
 import { useNavigate } from "react-router-dom";
 import HalfRating from "../../components/RatingComponent/RatingComponent";
+import { PiNotePencil } from "react-icons/pi";
+import ReviewPopup from "./ReviewPopup";
 
 const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   const [isLiked, setIsLiked] = useState(false);
+  const [rating, setRating] = useState<number>(0);
+  const [review, setReview] = useState<string>("");
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
   const [user, loading] = useAuthState(auth);
-  const [rating, setRating] = useState<number>(0); // Initialize with a default value
   const navigate = useNavigate();
 
   const handleSetRating = (number: number) => {
@@ -35,6 +38,7 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
           description: book.description,
           rating: number,
           isLiked: false,
+          review: review,
         });
       }
       handleSetRating(number);
@@ -42,6 +46,49 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
       console.error("Error setting rating: ", error);
     }
   };
+
+  const handleReview = async (newReview: string) => {
+    if (!user) {
+      // Create popup to tell user to log in
+      setIsReviewOpen(false);
+      return;
+    }
+
+    if (review === newReview) {
+      setIsReviewOpen(false);
+      return;
+    }
+
+    console.log("Reviewed");
+
+    const userBooksRef = doc(db, "users", user.uid, "books", book.id);
+
+    try {
+      if (isLiked) {
+        await updateDoc(userBooksRef, { review: newReview });
+        setReview(newReview);
+      } else {
+        await setDoc(userBooksRef, {
+          title: book.title,
+          author: book.author,
+          img: book.img,
+          category: book.category,
+          description: book.description,
+          rating: rating,
+          isLiked: false,
+          review: newReview,
+        });
+      }
+      setReview(newReview);
+      setIsReviewOpen(false);
+    } catch (error) {
+      console.error("Error adding review: ", error);
+    }
+  };
+
+  useEffect(() => {
+    console.log(review);
+  }, [review]);
 
   const handleAuthorClick = () => {
     const author = Array.isArray(book.author) ? book.author[0] : book.author;
@@ -71,6 +118,7 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
           description: book.description,
           rating: rating,
           isLiked: true,
+          review: "",
         });
         setIsLiked(true);
       }
@@ -81,32 +129,11 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
 
   useEffect(() => {
     if (user) {
-      checkIfBookIsLiked();
-      checkIfBookIsRated();
+      checkBookData();
     }
   }, [user, book.id]);
 
-  useEffect(() => {
-    console.log(rating);
-  }, [rating]);
-
-  const checkIfBookIsRated = async () => {
-    if (!user) return;
-
-    try {
-      const userBookRef = doc(db, "users", user.uid, "books", book.id);
-      const docSnapshot = await getDoc(userBookRef);
-
-      if (docSnapshot.exists()) {
-        const data = docSnapshot.data();
-        setRating(data.rating);
-      }
-    } catch (error) {
-      console.error("Error checking if book is liked: ", error);
-    }
-  };
-
-  const checkIfBookIsLiked = async () => {
+  const checkBookData = async () => {
     if (!user) return;
 
     try {
@@ -116,9 +143,11 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
       if (docSnapshot.exists()) {
         const data = docSnapshot.data();
         setIsLiked(data.isLiked === true);
+        setRating(data.rating || 0);
+        setReview(data.review || "");
       }
     } catch (error) {
-      console.error("Error checking if book is liked: ", error);
+      console.error("Error fetching book data: ", error);
     }
   };
 
@@ -139,17 +168,26 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
               <strong>Category: </strong>
               {book.category}
             </p>
-            {!isLiked ? (
-              <button className={styles.likeButton} onClick={handleBookLike}>
-                <BsHeart className={styles.heart} />
-                <p>Add to my books</p>
+            <div className={styles.bookButtonsContainer}>
+              {!isLiked ? (
+                <button className={styles.likeButton} onClick={handleBookLike}>
+                  <BsHeart className={styles.heart} />
+                  <p>Add to my books</p>
+                </button>
+              ) : (
+                <button className={styles.likeButton} onClick={handleBookLike}>
+                  <BsHeartFill className={styles.heartActive} />
+                  <p>Remove from my collection</p>
+                </button>
+              )}
+              <button
+                className={styles.reviewButton}
+                onClick={() => setIsReviewOpen(true)}
+              >
+                <PiNotePencil />
+                Review
               </button>
-            ) : (
-              <button className={styles.likeButton} onClick={handleBookLike}>
-                <BsHeartFill className={styles.heartActive} />
-                <p>Remove from my collection</p>
-              </button>
-            )}
+            </div>
             <div className={styles.ratingContainer}>
               <p>
                 <strong>Your rating: </strong>
@@ -164,6 +202,13 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
         </p>
         <p>{book.description}</p>
       </div>
+      <ReviewPopup
+        book={book}
+        isOpen={isReviewOpen}
+        review={review}
+        onConfirm={(newReview) => handleReview(newReview)}
+        onCancel={() => setIsReviewOpen(false)}
+      />
     </div>
   );
 };
