@@ -1,6 +1,7 @@
 const BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
 const API_KEY = import.meta.env.VITE_API_KEY;
 const maxResults = 20;
+
 const fetchBooks = async ({
   searchQuery,
   startIndex,

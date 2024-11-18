@@ -20,6 +20,7 @@ const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [bestsellerListIndex, setBestSellerListIndex] = useState(0);
 
   const handleSetSearchQuery = (value: string) => {
     setSearchQuery(value);
@@ -43,8 +44,6 @@ const App: React.FC = () => {
   useEffect(() => {
     if (!searchQuery) return; // Do not search if query is empty
 
-    console.log(startIndex);
-
     const handleBookSearch = async () => {
       setBookSearchResult([]);
       setLoading(true);
@@ -56,8 +55,6 @@ const App: React.FC = () => {
       } catch (error) {
         console.error("Error fetching books: ", error);
         setLoading(false);
-      } finally {
-        console.log(searchQuery);
       }
     };
     handleBookSearch();
@@ -81,7 +78,16 @@ const App: React.FC = () => {
     <Router>
       <NavigationBar handleSetSearchQuery={handleSetSearchQuery} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              setCurrentAuthor={setCurrentAuthor}
+              setCurrentBook={setCurrentBook}
+              bestsellerListIndex={bestsellerListIndex}
+            />
+          }
+        />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route

@@ -29,10 +29,6 @@ const SearchResult: React.FC<SearchResultProps> = ({
     }
   };
 
-  useEffect(() => {
-    console.log(searchResult);
-  }, [searchResult]);
-
   return (
     <>
       <div className={styles.contentBody}>

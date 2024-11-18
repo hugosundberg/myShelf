@@ -85,10 +85,6 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
     }
   };
 
-  useEffect(() => {
-    console.log(review);
-  }, [review]);
-
   const handleAuthorClick = () => {
     const author = Array.isArray(book.author) ? book.author[0] : book.author;
     setCurrentAuthor(author);
@@ -130,7 +126,6 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   useEffect(() => {
     if (user) {
       checkBookData();
-      console.log(book);
     }
   }, [user, book.id]);
 
