@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import HalfRating from "../../components/RatingComponent/RatingComponent";
 import { PiNotePencil } from "react-icons/pi";
 import ReviewPopup from "./ReviewPopup";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -202,7 +203,21 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
       </div>
       {review !== "" && (
         <div className={styles.reviewContainer}>
-          <h2>Your review</h2>
+          <div className={styles.reviewHeader}>
+            <h2>Your review</h2>
+            <button onClick={() => setIsReviewOpen(true)}>
+              <PiNotePencil />
+              Edit
+            </button>
+            <button
+              onClick={() => {
+                handleReview("");
+              }}
+            >
+              <RiDeleteBin5Line />
+              Remove
+            </button>
+          </div>
           <p>{review}</p>
         </div>
       )}

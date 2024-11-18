@@ -96,6 +96,22 @@
     margin-top: 20px;
 }
 
+.reviewHeader {
+    display: flex;
+    gap: 10px;
+}
+
+.reviewHeader button { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: fit-content;
+    width: fit-content;
+    background-color: var(--primary-color);
+    cursor: pointer;
+}
+
 .reviewContainer h2 {
     margin-top: 0;
 }
