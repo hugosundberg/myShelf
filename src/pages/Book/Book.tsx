@@ -115,6 +115,7 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
           img: book.img,
           category: book.category,
           description: book.description,
+          year: book.year,
           rating: rating,
           isLiked: true,
           review: "",
@@ -129,6 +130,7 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   useEffect(() => {
     if (user) {
       checkBookData();
+      console.log(book);
     }
   }, [user, book.id]);
 

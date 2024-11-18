@@ -43,6 +43,7 @@ export const BookCard = ({
           img: book.img,
           category: book.category,
           description: book.description,
+          year: book.year,
           rating: 0,
           isLiked: true,
         });
