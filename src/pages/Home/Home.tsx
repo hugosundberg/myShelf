@@ -14,18 +14,29 @@ const Home: React.FC<HomeProps> = ({
   setCurrentAuthor,
   bestsellerListIndex,
 }: HomeProps) => {
-  const [bestsellers, setBestsellers] = useState<Book[]>([]);
+  const [bestsellers, setBestsellers] = useState({});
+  const [topFictionBooks, setTopFictionBooks] = useState<Book[]>([]);
+  const [topNonFictionBooks, setTopNonFictionBooks] = useState<Book[]>([]);
+  const [topYoungAdultBooks, setTopYoungAdultBooks] = useState<Book[]>([]);
+  const [topChildrenBooks, setTopChildrenBooks] = useState<Book[]>([]);
+  const [topScienceBooks, setTopScienceBooks] = useState<Book[]>([]);
+  const [topFoodFitnessBooks, setTopFoodFitnessBooks] = useState<Book[]>([]);
 
   useEffect(() => {
     getBestsellers();
-  }, [bestsellerListIndex]);
+  }, []);
 
   const getBestsellers = async () => {
     try {
-      const bestsellers = await nytAPI.fetchLatestBestsellers(
-        bestsellerListIndex
-      );
-      setBestsellers(bestsellers);
+      const bestsellers = await nytAPI.fetchLatestBestsellers();
+
+      setTopFictionBooks(bestsellers.topFictionBooks);
+      setTopNonFictionBooks(bestsellers.topNonFictionBooks);
+      setTopYoungAdultBooks(bestsellers.topYoungAdultBooks);
+      setTopChildrenBooks(bestsellers.topChildrenBooks);
+      setTopScienceBooks(bestsellers.topScienceBooks);
+      setTopFoodFitnessBooks(bestsellers.topFoodFitnessBooks);
+
       return bestsellers;
     } catch (error) {
       console.error("Error fetching books: ", error);
@@ -47,8 +58,73 @@ const Home: React.FC<HomeProps> = ({
         <button onClick={getLists}>Get Lists</button>
         <h1 className={styles.title}>New York Times Bestsellers</h1>
         <div className={styles.bookContainer}>
-          {bestsellers.length > 0 &&
-            bestsellers.map((book, index) => (
+          {bestsellerListIndex === 0 &&
+            topFictionBooks.map((book, index) => (
+              <div className={styles.listItemContainer}>
+                <h2 className={styles.listPosition}>{index + 1}</h2>
+                <SmallBookCard
+                  key={`${book.id}-${index}`}
+                  book={book}
+                  setCurrentBook={setCurrentBook}
+                  setCurrentAuthor={setCurrentAuthor}
+                />
+              </div>
+            ))}
+
+          {bestsellerListIndex === 1 &&
+            topNonFictionBooks.map((book, index) => (
+              <div className={styles.listItemContainer}>
+                <h2 className={styles.listPosition}>{index + 1}</h2>
+                <SmallBookCard
+                  key={`${book.id}-${index}`}
+                  book={book}
+                  setCurrentBook={setCurrentBook}
+                  setCurrentAuthor={setCurrentAuthor}
+                />
+              </div>
+            ))}
+
+          {bestsellerListIndex === 25 &&
+            topYoungAdultBooks.map((book, index) => (
+              <div className={styles.listItemContainer}>
+                <h2 className={styles.listPosition}>{index + 1}</h2>
+                <SmallBookCard
+                  key={`${book.id}-${index}`}
+                  book={book}
+                  setCurrentBook={setCurrentBook}
+                  setCurrentAuthor={setCurrentAuthor}
+                />
+              </div>
+            ))}
+
+          {bestsellerListIndex === 17 &&
+            topChildrenBooks.map((book, index) => (
+              <div className={styles.listItemContainer}>
+                <h2 className={styles.listPosition}>{index + 1}</h2>
+                <SmallBookCard
+                  key={`${book.id}-${index}`}
+                  book={book}
+                  setCurrentBook={setCurrentBook}
+                  setCurrentAuthor={setCurrentAuthor}
+                />
+              </div>
+            ))}
+
+          {bestsellerListIndex === 55 &&
+            topScienceBooks.map((book, index) => (
+              <div className={styles.listItemContainer}>
+                <h2 className={styles.listPosition}>{index + 1}</h2>
+                <SmallBookCard
+                  key={`${book.id}-${index}`}
+                  book={book}
+                  setCurrentBook={setCurrentBook}
+                  setCurrentAuthor={setCurrentAuthor}
+                />
+              </div>
+            ))}
+
+          {bestsellerListIndex === 40 &&
+            topFoodFitnessBooks.map((book, index) => (
               <div className={styles.listItemContainer}>
                 <h2 className={styles.listPosition}>{index + 1}</h2>
                 <SmallBookCard

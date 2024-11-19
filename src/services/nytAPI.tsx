@@ -17,17 +17,22 @@ const fetchBestsellersLists = async () => {
   }
 };
 
-const fetchLatestBestsellers = async (listIndex: number): Promise<Book[]> => {
-  console.log(listIndex);
-
+const fetchLatestBestsellers = async (): Promise<{
+  topFictionBooks: Book[];
+  topNonFictionBooks: Book[];
+  topYoungAdultBooks: Book[];
+  topChildrenBooks: Book[];
+  topScienceBooks: Book[];
+  topFoodFitnessBooks: Book[];
+}> => {
   try {
     const response = await fetch(`${BASE_URL}${API_KEY}`);
 
     const data = await response.json();
 
-    const books: Book[] = data.results.lists[listIndex].books.map(
+    const topFictionBooks: Book[] = data.results.lists[0].books.map(
       (book: any) => ({
-        key: listIndex,
+        key: book.id,
         id: book.primary_isbn10,
         title: book.title,
         author: book.author,
@@ -35,12 +40,67 @@ const fetchLatestBestsellers = async (listIndex: number): Promise<Book[]> => {
       })
     );
 
-    console.log(books);
+    const topNonFictionBooks: Book[] = data.results.lists[1].books.map(
+      (book: any) => ({
+        key: book.id,
+        id: book.primary_isbn10,
+        title: book.title,
+        author: book.author,
+        img: book.book_image,
+      })
+    );
 
-    return books;
+    const topYoungAdultBooks: Book[] = data.results.lists[25].books.map(
+      (book: any) => ({
+        key: book.id,
+        id: book.primary_isbn10,
+        title: book.title,
+        author: book.author,
+        img: book.book_image,
+      })
+    );
+
+    const topChildrenBooks: Book[] = data.results.lists[17].books.map(
+      (book: any) => ({
+        key: book.id,
+        id: book.primary_isbn10,
+        title: book.title,
+        author: book.author,
+        img: book.book_image,
+      })
+    );
+
+    const topScienceBooks: Book[] = data.results.lists[55].books.map(
+      (book: any) => ({
+        key: book.id,
+        id: book.primary_isbn10,
+        title: book.title,
+        author: book.author,
+        img: book.book_image,
+      })
+    );
+
+    const topFoodFitnessBooks: Book[] = data.results.lists[40].books.map(
+      (book: any) => ({
+        key: book.id,
+        id: book.primary_isbn10,
+        title: book.title,
+        author: book.author,
+        img: book.book_image,
+      })
+    );
+
+    return {
+      topFictionBooks,
+      topNonFictionBooks,
+      topYoungAdultBooks,
+      topChildrenBooks,
+      topScienceBooks,
+      topFoodFitnessBooks,
+    };
   } catch (error) {
     console.error("Error fetching bestsellers: ", error);
-    return [];
+    throw error;
   }
 };
 
