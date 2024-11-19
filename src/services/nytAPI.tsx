@@ -11,6 +11,8 @@ const fetchBestsellersLists = async () => {
     const response = await fetch(`${LISTS_URL}${API_KEY}`);
 
     const data = await response.json();
+    console.log(data);
+
     return data;
   } catch (error) {
     console.error("Error fetching bestseller lists: ", error);
@@ -50,7 +52,7 @@ const fetchLatestBestsellers = async (): Promise<{
       })
     );
 
-    const topYoungAdultBooks: Book[] = data.results.lists[25].books.map(
+    const topYoungAdultBooks: Book[] = data.results.lists[1].books.map(
       (book: any) => ({
         key: book.id,
         id: book.primary_isbn10,
@@ -60,7 +62,7 @@ const fetchLatestBestsellers = async (): Promise<{
       })
     );
 
-    const topChildrenBooks: Book[] = data.results.lists[17].books.map(
+    const topChildrenBooks: Book[] = data.results.lists[1].books.map(
       (book: any) => ({
         key: book.id,
         id: book.primary_isbn10,
@@ -70,7 +72,7 @@ const fetchLatestBestsellers = async (): Promise<{
       })
     );
 
-    const topScienceBooks: Book[] = data.results.lists[55].books.map(
+    const topScienceBooks: Book[] = data.results.lists[1].books.map(
       (book: any) => ({
         key: book.id,
         id: book.primary_isbn10,
@@ -80,7 +82,7 @@ const fetchLatestBestsellers = async (): Promise<{
       })
     );
 
-    const topFoodFitnessBooks: Book[] = data.results.lists[40].books.map(
+    const topFoodFitnessBooks: Book[] = data.results.lists[1].books.map(
       (book: any) => ({
         key: book.id,
         id: book.primary_isbn10,
