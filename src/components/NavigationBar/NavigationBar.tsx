@@ -8,10 +8,12 @@ import { auth } from "../../utils/firebase";
 
 interface NavigationBarProps {
   handleSetSearchQuery: (query: string) => void;
+  setBestSellerListIndex: (number: number) => void;
 }
 
 const NavigationBar: React.FC<NavigationBarProps> = ({
   handleSetSearchQuery,
+  setBestSellerListIndex,
 }) => {
   const navigate = useNavigate();
   const [input, setInput] = useState("");
@@ -92,11 +94,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
       </div>
       <div className={styles.lowerNav}>
         <ul>
-          <li>Books</li>
-          <li>Bestsellers</li>
-          <li>Fiction</li>
-          <li>Non-Fiction</li>
-          <li>Children</li>
+          <li onClick={() => setBestSellerListIndex(0)}>Fiction</li>
+          <li onClick={() => setBestSellerListIndex(1)}>Non-Fiction</li>
+          <li onClick={() => setBestSellerListIndex(25)}>Young Adult</li>
+          <li onClick={() => setBestSellerListIndex(17)}>Children</li>
+          <li onClick={() => setBestSellerListIndex(55)}>Science</li>
+          <li onClick={() => setBestSellerListIndex(40)}>Food & Fitness</li>
         </ul>
       </div>
     </div>

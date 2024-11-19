@@ -76,7 +76,10 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <NavigationBar handleSetSearchQuery={handleSetSearchQuery} />
+      <NavigationBar
+        handleSetSearchQuery={handleSetSearchQuery}
+        setBestSellerListIndex={setBestSellerListIndex}
+      />
       <Routes>
         <Route
           path="/"

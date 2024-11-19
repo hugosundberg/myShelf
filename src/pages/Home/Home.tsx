@@ -45,7 +45,7 @@ const Home: React.FC<HomeProps> = ({
     <>
       <div className={styles.contentBody}>
         <button onClick={getLists}>Get Lists</button>
-        <h2>New York Times Bestsellers</h2>
+        <h1 className={styles.title}>New York Times Bestsellers</h1>
         <div className={styles.bookContainer}>
           {bestsellers.length > 0 &&
             bestsellers.map((book, index) => (
