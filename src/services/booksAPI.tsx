@@ -15,6 +15,8 @@ const fetchBooks = async ({
     );
     const data = await response.json();
 
+    console.log(data);
+
     const books: Book[] = data.items.map((book: any) => ({
       id: book.id,
       title: book.volumeInfo.title || "No title available",
@@ -30,6 +32,25 @@ const fetchBooks = async ({
     return books;
   } catch (error) {
     throw new Error("Error fetching books: ");
+  }
+};
+
+const fetchVolumeByISBN = async ({
+  isbn10,
+  isbn13,
+}: {
+  isbn10: number;
+  isbn13: number;
+}) => {
+  try {
+    const response = await fetch(`${BASE_URL}isbn:${isbn13}&key=${API_KEY}`);
+    const data = await response.json();
+
+    const book: Book = data;
+
+    return book;
+  } catch (error) {
+    console.error("Error fetching book: ", error);
   }
 };
 
@@ -67,4 +88,5 @@ const fetchAuthor = async ({
 export default {
   fetchBooks,
   fetchAuthor,
+  fetchVolumeByISBN,
 };
