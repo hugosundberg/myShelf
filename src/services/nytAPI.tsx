@@ -11,6 +11,7 @@ const fetchBestsellersLists = async () => {
     const response = await fetch(`${LISTS_URL}${API_KEY}`);
 
     const data = await response.json();
+
     console.log(data);
 
     return data;
@@ -24,8 +25,7 @@ const fetchLatestBestsellers = async (): Promise<{
   topNonFictionBooks: Book[];
   topYoungAdultBooks: Book[];
   topChildrenBooks: Book[];
-  topScienceBooks: Book[];
-  topFoodFitnessBooks: Book[];
+  topLifestyleBooks: Book[];
 }> => {
   try {
     const response = await fetch(`${BASE_URL}${API_KEY}`);
@@ -52,7 +52,9 @@ const fetchLatestBestsellers = async (): Promise<{
       })
     );
 
-    const topYoungAdultBooks: Book[] = data.results.lists[1].books.map(
+    console.log(data.results.lists);
+
+    const topYoungAdultBooks: Book[] = data.results.lists[10].books.map(
       (book: any) => ({
         key: book.id,
         id: book.primary_isbn10,
@@ -62,7 +64,7 @@ const fetchLatestBestsellers = async (): Promise<{
       })
     );
 
-    const topChildrenBooks: Book[] = data.results.lists[1].books.map(
+    const topChildrenBooks: Book[] = data.results.lists[8].books.map(
       (book: any) => ({
         key: book.id,
         id: book.primary_isbn10,
@@ -72,17 +74,7 @@ const fetchLatestBestsellers = async (): Promise<{
       })
     );
 
-    const topScienceBooks: Book[] = data.results.lists[1].books.map(
-      (book: any) => ({
-        key: book.id,
-        id: book.primary_isbn10,
-        title: book.title,
-        author: book.author,
-        img: book.book_image,
-      })
-    );
-
-    const topFoodFitnessBooks: Book[] = data.results.lists[1].books.map(
+    const topLifestyleBooks: Book[] = data.results.lists[13].books.map(
       (book: any) => ({
         key: book.id,
         id: book.primary_isbn10,
@@ -97,8 +89,7 @@ const fetchLatestBestsellers = async (): Promise<{
       topNonFictionBooks,
       topYoungAdultBooks,
       topChildrenBooks,
-      topScienceBooks,
-      topFoodFitnessBooks,
+      topLifestyleBooks,
     };
   } catch (error) {
     console.error("Error fetching bestsellers: ", error);

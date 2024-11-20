@@ -98,8 +98,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           <li onClick={() => setBestSellerListIndex(1)}>Non-Fiction</li>
           <li onClick={() => setBestSellerListIndex(25)}>Young Adult</li>
           <li onClick={() => setBestSellerListIndex(17)}>Children</li>
-          <li onClick={() => setBestSellerListIndex(55)}>Science</li>
-          <li onClick={() => setBestSellerListIndex(40)}>Food & Fitness</li>
+          <li onClick={() => setBestSellerListIndex(55)}>Lifestyle</li>
         </ul>
       </div>
     </div>
