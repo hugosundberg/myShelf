@@ -7,6 +7,7 @@ import { auth, db } from "../../utils/firebase";
 import { useEffect, useState } from "react";
 import { doc, deleteDoc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import HalfRating from "../../components/RatingComponent/RatingComponent";
+import booksAPI from "../../services/booksAPI";
 
 export const SmallBookCard = ({
   book,

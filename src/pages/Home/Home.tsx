@@ -42,12 +42,10 @@ const Home: React.FC<HomeProps> = ({
   };
 
   const handleFetchISBN = async (isbn: number) => {
-    if (isbn.toString().length === 10) {
-      try {
-        const book = await booksAPI.fetchVolumeByISBN({ isbn });
-      } catch (error) {
-        console.error("Error: ", error);
-      }
+    try {
+      const book = await booksAPI.fetchVolumeByISBN({ isbn });
+    } catch (error) {
+      console.error("Error: ", error);
     }
   };
 

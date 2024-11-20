@@ -12,6 +12,8 @@ const fetchBestsellersLists = async () => {
 
     const data = await response.json();
 
+    console.log(data);
+
     return data;
   } catch (error) {
     console.error("Error fetching bestseller lists: ", error);
@@ -29,6 +31,7 @@ const fetchLatestBestsellers = async (): Promise<{
     const response = await fetch(`${BASE_URL}${API_KEY}`);
 
     const data = await response.json();
+    console.log(data);
 
     const topFictionBooks: Book[] = data.results.lists[0].books.map(
       (book: any) => ({
@@ -49,8 +52,6 @@ const fetchLatestBestsellers = async (): Promise<{
         img: book.book_image,
       })
     );
-
-    console.log(data.results.lists);
 
     const topYoungAdultBooks: Book[] = data.results.lists[10].books.map(
       (book: any) => ({

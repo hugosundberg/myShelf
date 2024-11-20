@@ -38,9 +38,19 @@ const fetchVolumeByISBN = async ({ isbn }: { isbn: number }) => {
     const response = await fetch(`${BASE_URL}isbn:${isbn}&key=${API_KEY}`);
     const data = await response.json();
 
-    const book: Book = data;
+    const book: Book = data.items.map((book: any) => ({
+      id: book.id,
+      title: book.volumeInfo.title || "No title available",
+      author: book.volumeInfo.authors?.join(", ") || "Unknown author",
+      year: book.volumeInfo.publishedDate
+        ? parseInt(book.volumeInfo.publishedDate.split("-")[0])
+        : 0,
+      img: book.volumeInfo.imageLinks?.thumbnail || "",
+      description: book.volumeInfo.description || "No description available",
+      category: book.volumeInfo.categories?.join(", ") || "No category",
+    }));
 
-    console.log(data);
+    console.log(book);
 
     return book;
   } catch (error) {
