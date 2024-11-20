@@ -2,6 +2,7 @@ import nytAPI from "../../services/nytAPI";
 import styles from "./Home.module.css";
 import { SmallBookCard } from "../../components/SmallBookCard/SmallBookCard";
 import { useEffect, useState } from "react";
+import booksAPI from "../../services/booksAPI";
 
 interface HomeProps {
   setCurrentBook: (book: Book) => void;
@@ -40,9 +41,22 @@ const Home: React.FC<HomeProps> = ({
     }
   };
 
+  const handleFetchISBN = async (isbn: number) => {
+    if (isbn.toString().length === 10) {
+      try {
+        const book = await booksAPI.fetchVolumeByISBN({ isbn });
+      } catch (error) {
+        console.error("Error: ", error);
+      }
+    }
+  };
+
   return (
     <>
       <div className={styles.contentBody}>
+        <button onClick={() => handleFetchISBN(9781565633254)}>
+          Fetch ISBN
+        </button>
         <h1 className={styles.title}>New York Times Bestsellers</h1>
         <div className={styles.bookContainer}>
           {bestsellerListIndex === 0 &&
