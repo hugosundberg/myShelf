@@ -40,18 +40,9 @@ const Home: React.FC<HomeProps> = ({
     }
   };
 
-  const getLists = async () => {
-    try {
-      const lists = await nytAPI.fetchBestsellersLists();
-    } catch (error) {
-      console.error("Error fetching bestseller lists: ", error);
-    }
-  };
-
   return (
     <>
       <div className={styles.contentBody}>
-        <button onClick={getLists}>Get Lists</button>
         <h1 className={styles.title}>New York Times Bestsellers</h1>
         <div className={styles.bookContainer}>
           {bestsellerListIndex === 0 &&
