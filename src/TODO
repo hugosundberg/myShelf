@@ -1,12 +1,10 @@
 KNOWN BUGS
 
-- Clicking author in collection or Book shows "Results for: .... " or previous current author
-- Clicking author does'nt work properly
 - User data is not properly deleted on user deletion (invalid collection reference)
-- Each child in a list should hava a unique key (on bestseller lists in "Home")
 
 // TODO:
 
+- Fix category links on other pages
 - Add book id or search params to URL
 - Display publishing year in "Book"
 - Redesign

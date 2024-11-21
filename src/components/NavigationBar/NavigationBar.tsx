@@ -34,6 +34,11 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
     navigate("/search");
   };
 
+  const handleCategoryClick = (number: number) => {
+    setBestSellerListIndex(number);
+    navigate("/");
+  };
+
   return (
     <div className={styles.navBar}>
       <div className={styles.upperNav}>
@@ -94,11 +99,11 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
       </div>
       <div className={styles.lowerNav}>
         <ul>
-          <li onClick={() => setBestSellerListIndex(0)}>Fiction</li>
-          <li onClick={() => setBestSellerListIndex(1)}>Non-Fiction</li>
-          <li onClick={() => setBestSellerListIndex(25)}>Young Adult</li>
-          <li onClick={() => setBestSellerListIndex(17)}>Children</li>
-          <li onClick={() => setBestSellerListIndex(55)}>Lifestyle</li>
+          <li onClick={() => handleCategoryClick(0)}>Fiction</li>
+          <li onClick={() => handleCategoryClick(1)}>Non-Fiction</li>
+          <li onClick={() => handleCategoryClick(25)}>Young Adult</li>
+          <li onClick={() => handleCategoryClick(17)}>Children</li>
+          <li onClick={() => handleCategoryClick(55)}>Lifestyle</li>
         </ul>
       </div>
     </div>
