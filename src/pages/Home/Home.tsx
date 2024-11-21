@@ -2,6 +2,7 @@ import nytAPI from "../../services/nytAPI";
 import styles from "./Home.module.css";
 import { useEffect, useRef, useState } from "react";
 import { BestSellerBookCard } from "../../components/BestSellerBookCard/BestSellerBookCard";
+import { CircularProgress } from "@mui/material";
 
 interface HomeProps {
   setCurrentBook: (book: Book) => void;
@@ -22,6 +23,7 @@ const Home: React.FC<HomeProps> = ({
     lifestyle: [],
   });
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   const hasRun = useRef(false);
 
   const stringFormatter = (string: string) => {
@@ -45,6 +47,8 @@ const Home: React.FC<HomeProps> = ({
   }, []);
 
   const getBestsellers = async () => {
+    setLoading(true);
+
     try {
       const bestsellers = await nytAPI.fetchLatestBestsellers();
 
@@ -56,6 +60,7 @@ const Home: React.FC<HomeProps> = ({
         lifestyle: bestsellers.topLifestyleBooks,
       });
 
+      setLoading(false);
       setError(null);
     } catch (err) {
       setError("Failed to fetch bestsellers. Please try again later.");
@@ -70,9 +75,16 @@ const Home: React.FC<HomeProps> = ({
     <div className={styles.contentBody}>
       <h1 className={styles.title}>New York Times Bestsellers</h1>
       {error && <div className={styles.error}>{error}</div>}
-      <h2 className={styles.title}>
-        {stringFormatter(currentCategory)} bestsellers
-      </h2>
+      {loading ? (
+        <CircularProgress
+          color="inherit"
+          style={{ position: "absolute", top: "200px", padding: 0 }}
+        />
+      ) : (
+        <h2 className={styles.title}>
+          {stringFormatter(currentCategory)} bestsellers
+        </h2>
+      )}
       <div className={styles.bookContainer}>
         {booksToDisplay.map((book, index) => (
           <div className={styles.listItemContainer} key={index}>

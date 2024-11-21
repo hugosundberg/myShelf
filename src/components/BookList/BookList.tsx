@@ -1,6 +1,5 @@
 import { BookCard } from "../BookCard/BookCard";
 import styles from "./BookList.module.css";
-import Pagination from "../../pages/SearchResult/Pagination";
 
 interface BookListProps {
   books: Book[];
@@ -15,9 +14,6 @@ const BookList = ({
   books,
   setCurrentBook,
   setCurrentAuthor,
-  setCurrentPage,
-  setStartIndex,
-  currentPage,
 }: BookListProps) => {
   return (
     <div className={styles.bookList}>

@@ -13,7 +13,7 @@ export const BookCard = ({
   setCurrentAuthor,
 }: BookProps) => {
   const navigate = useNavigate();
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
@@ -94,6 +94,10 @@ export const BookCard = ({
         <h2 onClick={() => handleBookClick(book)}>{book.title}</h2>
         <p className={styles.author} onClick={() => handleAuthorClick(book)}>
           <strong>{book.author}</strong>
+        </p>
+        <p>
+          <strong>Published: </strong>
+          {book.year}
         </p>
         <p>{book.category}</p>
         <p>{book.description}</p>

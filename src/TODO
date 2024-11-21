@@ -1,12 +1,10 @@
 KNOWN BUGS
 
-- User data is not properly deleted on user deletion (invalid collection reference)
-
 // TODO:
 
-- Fix category links on other pages
+- Display popup when unauthorized user tries saving, rating, reviewing books
 - Add book id or search params to URL
 - Display publishing year in "Book"
+
 - Redesign
-- Responsiveness (Hamburger menu started)
-- Remove lower nav bar (or implement functionality )
+- Responsiveness (Hamburger menu started)w
