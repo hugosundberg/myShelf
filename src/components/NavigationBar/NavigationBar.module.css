@@ -87,11 +87,11 @@
 }
 
 .navMenu button {
-    border-radius: 20px;
+    border-radius: 40px;
     display: flex;
     align-items: center;
     padding: 7px;
-    padding-inline: 10px;
+    padding-inline: 15px;
     gap: 20px;
 }
 

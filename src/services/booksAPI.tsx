@@ -33,12 +33,14 @@ const fetchBooks = async ({
   }
 };
 
-const fetchVolumeByISBN = async ({ isbn }: { isbn: number }) => {
+const fetchVolumeByISBN = async ({ isbn }: { isbn: number }): Promise<Book> => {
   try {
     const response = await fetch(`${BASE_URL}isbn:${isbn}&key=${API_KEY}`);
     const data = await response.json();
 
-    const book: Book = data.items.map((book: any) => ({
+    const book = data.items[0];
+
+    const processedBook: Book = {
       id: book.id,
       title: book.volumeInfo.title || "No title available",
       author: book.volumeInfo.authors?.join(", ") || "Unknown author",
@@ -48,13 +50,16 @@ const fetchVolumeByISBN = async ({ isbn }: { isbn: number }) => {
       img: book.volumeInfo.imageLinks?.thumbnail || "",
       description: book.volumeInfo.description || "No description available",
       category: book.volumeInfo.categories?.join(", ") || "No category",
-    }));
+      rating: 0,
+      isLiked: false,
+      isbn: isbn,
+    };
 
-    console.log(book);
-
-    return book;
+    return processedBook;
   } catch (error) {
-    console.error("Error fetching book: ", error);
+    console.error(error);
+
+    throw new Error("Error fetching book");
   }
 };
 

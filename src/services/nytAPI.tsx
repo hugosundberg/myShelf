@@ -1,24 +1,7 @@
 const API_KEY = import.meta.env.VITE_NYT_API_KEY;
 
-const LISTS_URL =
-  "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=";
-
 const BASE_URL =
   "https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=";
-
-const fetchBestsellersLists = async () => {
-  try {
-    const response = await fetch(`${LISTS_URL}${API_KEY}`);
-
-    const data = await response.json();
-
-    console.log(data);
-
-    return data;
-  } catch (error) {
-    console.error("Error fetching bestseller lists: ", error);
-  }
-};
 
 const fetchLatestBestsellers = async (): Promise<{
   topFictionBooks: Book[];
@@ -31,12 +14,10 @@ const fetchLatestBestsellers = async (): Promise<{
     const response = await fetch(`${BASE_URL}${API_KEY}`);
 
     const data = await response.json();
-    console.log(data);
 
     const topFictionBooks: Book[] = data.results.lists[0].books.map(
       (book: any) => ({
-        key: book.id,
-        id: 0,
+        id: "",
         title: book.title,
         author: book.author,
         img: book.book_image,
@@ -46,41 +27,41 @@ const fetchLatestBestsellers = async (): Promise<{
 
     const topNonFictionBooks: Book[] = data.results.lists[1].books.map(
       (book: any) => ({
-        key: book.id,
-        id: book.primary_isbn10,
+        id: "",
         title: book.title,
         author: book.author,
         img: book.book_image,
+        isbn: book.primary_isbn13,
       })
     );
 
     const topYoungAdultBooks: Book[] = data.results.lists[10].books.map(
       (book: any) => ({
-        key: book.id,
-        id: book.primary_isbn10,
+        id: "",
         title: book.title,
         author: book.author,
         img: book.book_image,
+        isbn: book.primary_isbn13,
       })
     );
 
     const topChildrenBooks: Book[] = data.results.lists[8].books.map(
       (book: any) => ({
-        key: book.id,
-        id: book.primary_isbn10,
+        id: "",
         title: book.title,
         author: book.author,
         img: book.book_image,
+        isbn: book.primary_isbn13,
       })
     );
 
     const topLifestyleBooks: Book[] = data.results.lists[13].books.map(
       (book: any) => ({
-        key: book.id,
-        id: book.primary_isbn10,
+        id: "",
         title: book.title,
         author: book.author,
         img: book.book_image,
+        isbn: book.primary_isbn13,
       })
     );
 
@@ -97,4 +78,4 @@ const fetchLatestBestsellers = async (): Promise<{
   }
 };
 
-export default { fetchLatestBestsellers, fetchBestsellersLists };
+export default { fetchLatestBestsellers };

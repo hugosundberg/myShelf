@@ -18,18 +18,21 @@
     flex-direction: row;
     justify-content: center;
     gap: 30px;
-    padding: 20px;
+    padding-inline: 20px;
     max-width: 2000px;
 }
 
 .title {
     color: white;
     margin: 0px;
+    margin-top: 20px;
+    text-transform: capitalize;
 }
 
 .listItemContainer {
     padding: 0px;
     margin: 0px;
+
 }
 
 .listPosition {

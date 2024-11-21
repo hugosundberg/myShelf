@@ -1,6 +1,7 @@
 import styles from "./BestSellerBookCard.module.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
+import booksAPI from "../../services/booksAPI";
 
 export const BestSellerBookCard = ({
   book,
@@ -9,9 +10,18 @@ export const BestSellerBookCard = ({
 }: BookProps) => {
   const navigate = useNavigate();
 
-  const handleBookClick = (book: Book) => {
-    if (setCurrentBook) setCurrentBook(book);
-    navigate("/book");
+  const handleBookClick = async (book: Book) => {
+    if (book.id === "") {
+      const isbn = book.isbn;
+
+      try {
+        const fetchedBook = await booksAPI.fetchVolumeByISBN({ isbn });
+        if (setCurrentBook) setCurrentBook(fetchedBook);
+        navigate("/book");
+      } catch (error) {
+        console.error("Error: ", error);
+      }
+    }
   };
 
   const handleAuthorClick = (book: Book) => {

@@ -36,6 +36,8 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    setSearchQuery(currentAuthor);
+
     if (currentAuthor !== "") {
       handleAuthorSearch();
     }

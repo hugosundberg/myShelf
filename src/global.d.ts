@@ -8,6 +8,7 @@ interface Book {
     category: string;
     rating: number;
     isLiked: boolean;
+    isbn: number;
 }
 
 interface SearchProps {
