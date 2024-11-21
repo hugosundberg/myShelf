@@ -1,20 +1,11 @@
 import styles from "./Account.module.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../utils/firebase";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Popup from "./Popup";
 import { reauthenticateWithPopup, GoogleAuthProvider } from "firebase/auth";
-import {
-  collection,
-  doc,
-  DocumentData,
-  DocumentReference,
-  getDocs,
-  query,
-  where,
-  writeBatch,
-} from "firebase/firestore";
+import { collection, doc, getDocs, writeBatch } from "firebase/firestore";
 
 const Account: React.FC = () => {
   const [user, loading] = useAuthState(auth);
@@ -46,24 +37,18 @@ const Account: React.FC = () => {
 
   const deleteUserData = async (uid: string) => {
     try {
-      // Step 1: Reference the user's books subcollection
       const booksCollectionRef = collection(db, `users/${uid}/books`);
       const booksSnapshot = await getDocs(booksCollectionRef);
 
-      // Step 2: Batch delete each book document in the books subcollection
       const batch = writeBatch(db);
       booksSnapshot.forEach((bookDoc) => {
         batch.delete(bookDoc.ref);
       });
 
-      const usersCollectionRef = collection(db, "users", uid);
-
-      // Step 3: Commit the batch to delete all books
-      await batch.commit();
-
-      // Step 4: Delete the main user document
       const userDocRef = doc(db, "users", uid);
-      await writeBatch(db).delete(userDocRef).commit();
+      batch.delete(userDocRef);
+
+      await batch.commit();
 
       console.log("User and all associated books deleted successfully");
     } catch (error) {
