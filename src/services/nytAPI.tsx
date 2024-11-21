@@ -36,10 +36,11 @@ const fetchLatestBestsellers = async (): Promise<{
     const topFictionBooks: Book[] = data.results.lists[0].books.map(
       (book: any) => ({
         key: book.id,
-        id: book.primary_isbn10,
+        id: 0,
         title: book.title,
         author: book.author,
         img: book.book_image,
+        isbn: book.primary_isbn13,
       })
     );
 
