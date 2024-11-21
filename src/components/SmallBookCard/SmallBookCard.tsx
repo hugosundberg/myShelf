@@ -14,8 +14,7 @@ export const SmallBookCard = ({
   setCurrentAuthor,
 }: BookProps) => {
   const navigate = useNavigate();
-  const [user, loading] = useAuthState(auth);
-  const [rating, setRating] = useState<number>();
+  const [user] = useAuthState(auth);
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
@@ -112,6 +111,10 @@ export const SmallBookCard = ({
         <h2 onClick={() => handleBookClick(book)}>{book.title}</h2>
         <p className={styles.author} onClick={() => handleAuthorClick(book)}>
           <strong>{book.author}</strong>
+        </p>
+        <p>
+          <strong>Published: </strong>
+          {book.year}
         </p>
         <p>{book.category}</p>
         <div className={styles.ratingLikeContainer}>

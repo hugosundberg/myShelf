@@ -5,6 +5,7 @@ KNOWN BUGS
 - Display popup when unauthorized user tries saving, rating, reviewing books
 - Add book id or search params to URL
 - Display publishing year in "Book"
+- Sort by category in MyBooks
 
 - Redesign
 - Responsiveness (Hamburger menu started)w
