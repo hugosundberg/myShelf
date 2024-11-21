@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./SearchResult.module.css";
 import BookList from "../../components/BookList/BookList";
 import { CircularProgress } from "@mui/material";
