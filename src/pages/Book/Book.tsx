@@ -9,6 +9,7 @@ import HalfRating from "../../components/RatingComponent/RatingComponent";
 import { PiNotePencil } from "react-icons/pi";
 import ReviewPopup from "./ReviewPopup";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import AuthPopup from "../../components/AuthPopup/AuthPopup";
 
 const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -16,6 +17,7 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   const [review, setReview] = useState<string>("");
   const [isReviewOpen, setIsReviewOpen] = useState(false);
   const [user, loading] = useAuthState(auth);
+  const [isAuthPopupVisible, setIsAuthPopupVisable] = useState(false);
   const navigate = useNavigate();
 
   const handleSetRating = (number: number) => {
@@ -23,7 +25,10 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   };
 
   const handleRating = async (number: number) => {
-    if (!user) return;
+    if (!user) {
+      setIsAuthPopupVisable(true);
+      return;
+    }
 
     const userBooksRef = doc(db, "users", user.uid, "books", book.id);
 
@@ -50,8 +55,7 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
 
   const handleReview = async (newReview: string) => {
     if (!user) {
-      // Create popup to tell user to log in
-      setIsReviewOpen(false);
+      setIsAuthPopupVisable(true);
       return;
     }
 
@@ -92,7 +96,10 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   };
 
   const handleBookLike = async () => {
-    if (!user) return;
+    if (!user) {
+      setIsAuthPopupVisable(true);
+      return;
+    }
 
     const userBooksRef = doc(db, "users", user.uid, "books", book.id);
 
@@ -178,7 +185,7 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
               )}
               <button
                 className={styles.reviewButton}
-                onClick={() => setIsReviewOpen(true)}
+                onClick={() => handleReview}
               >
                 <PiNotePencil />
                 Review
@@ -218,6 +225,10 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
           <p>{review}</p>
         </div>
       )}
+      <AuthPopup
+        isOpen={isAuthPopupVisible}
+        onCancel={() => setIsAuthPopupVisable(false)}
+      />
       <ReviewPopup
         book={book}
         isOpen={isReviewOpen}
