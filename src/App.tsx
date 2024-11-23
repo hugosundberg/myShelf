@@ -3,8 +3,6 @@ import booksAPI from "./services/booksAPI";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import About from "./pages/About/About";
-import Contact from "./pages/Contact/Contact";
 import SearchResult from "./pages/SearchResult/SearchResult";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Book from "./pages/Book/Book";
@@ -93,8 +91,7 @@ const App: React.FC = () => {
             />
           }
         />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+
         <Route
           path="/book"
           element={

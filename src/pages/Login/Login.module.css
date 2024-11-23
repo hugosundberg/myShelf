@@ -21,7 +21,8 @@
 }
 
 .loginButton {
-    width: 400px;
+    min-width: 400px;
+    max-height: 60px;
     display: flex;
     padding: 20px;
     justify-content: left;
