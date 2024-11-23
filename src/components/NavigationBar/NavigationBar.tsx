@@ -67,7 +67,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         </div>
         <div className={styles.navMenu}>
           {!user ? (
-            <button onClick={() => navigate("/login")}>Sign In</button>
+            <button
+              className={styles.signInButton}
+              onClick={() => navigate("/login")}
+            >
+              Sign In
+            </button>
           ) : (
             <>
               <button
