@@ -2,7 +2,6 @@
 
 ## // TODO:
 
-- Display popup when unauthorized user tries saving, rating, reviewing books
 - Add book id or search params to URL
 
 - Redesign
@@ -10,5 +9,6 @@
 
 ## // NON ESSENTIALS:
 
+- Add sort in search results
 - Add Facebook auth
 - Sort by category in MyBooks
