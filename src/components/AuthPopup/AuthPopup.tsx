@@ -3,10 +3,11 @@ import styles from "./AuthPopup.module.css";
 
 interface AuthPopupProps {
   isOpen: boolean;
+  onLogin: () => void;
   onCancel: () => void;
 }
 
-const AuthPopup: React.FC<AuthPopupProps> = ({ isOpen, onCancel }) => {
+const AuthPopup: React.FC<AuthPopupProps> = ({ isOpen, onLogin, onCancel }) => {
   if (!isOpen) return;
 
   return (
@@ -23,7 +24,7 @@ const AuthPopup: React.FC<AuthPopupProps> = ({ isOpen, onCancel }) => {
         <p>Adding, rating and reviewing books requires logging in. </p>
         <div className={styles.buttons}>
           <button onClick={onCancel}>Cancel</button>
-          <button>Log in</button>
+          <button onClick={onLogin}>Log in</button>
         </div>
       </div>
     </div>

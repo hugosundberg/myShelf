@@ -89,6 +89,10 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
     }
   };
 
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
   const handleAuthorClick = () => {
     const author = Array.isArray(book.author) ? book.author[0] : book.author;
     setCurrentAuthor(author);
@@ -228,6 +232,7 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
       <AuthPopup
         isOpen={isAuthPopupVisible}
         onCancel={() => setIsAuthPopupVisable(false)}
+        onLogin={handleLogin}
       />
       <ReviewPopup
         book={book}
