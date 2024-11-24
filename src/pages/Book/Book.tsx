@@ -171,10 +171,12 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
             <p>
               <strong>Published:</strong> {book.year}
             </p>
-            <p>
-              <strong>Category: </strong>
-              {book.category}
-            </p>
+            {book.category !== "No category" && (
+              <p>
+                <strong>Category: </strong>
+                {book.category}
+              </p>
+            )}
             <div className={styles.bookButtonsContainer}>
               {!isLiked ? (
                 <button className={styles.likeButton} onClick={handleBookLike}>
