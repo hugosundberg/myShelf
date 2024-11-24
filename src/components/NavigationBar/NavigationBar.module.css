@@ -104,10 +104,12 @@
 .hamburger {
     cursor: pointer;
     display: flex;
+    display: none;
     flex-direction: column;
     justify-content: space-around;
     width: 30px;
-    height: 24px;
+    height: 30px;
+    z-index: 999;
 }
   
 .hamburger .line {
@@ -150,13 +152,25 @@
 }
 
 @media (max-width: 622px) {
-    
+    .lowerNav ul {
+        font-size: 15px;
+        gap: 20px;
+    }
+
+   .upperNav {
+    gap: 20px;
+   }
+
+    .searchBar {
+        font-size: 15px;
+        width: 150px;
+    }
 }
   
 
 @media (max-width: 480px) {
     .upperNav {
-        gap: 10px;
+        justify-content: space-between;
     } 
 
     .lowerNav {
@@ -176,12 +190,15 @@
     }
 
     .searchBar {
-        width: 40px;
+        width: 150px;
     }
 
     .title {
         display: none;
     }
 
+    .hamburger {
+        display: flex;
+    }
     
 }

@@ -49,7 +49,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         <div className={styles.searchContainer}>
           <input
             type="text"
-            placeholder="Books, authors, etc."
+            placeholder="Books, authors..."
             aria-label="Search for books or authors"
             value={input}
             onChange={handleChange}
@@ -94,9 +94,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               </button>
               <div className={styles.hamburger} onClick={toggleMenu}>
                 {/* Hamburger Icon */}
-                <div className="line"></div>
-                <div className="line"></div>
-                <div className="line"></div>
+                <div className={styles.line}></div>
+                <div className={styles.line}></div>
+                <div className={styles.line}></div>
               </div>
             </>
           )}
