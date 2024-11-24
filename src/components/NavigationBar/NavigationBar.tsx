@@ -85,7 +85,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 className={styles.myAccountButton}
                 onClick={() => navigate("/account")}
               >
-                Account
+                <span className={styles.accountButtonText}>Account</span>
                 <img
                   src={user.photoURL || ""}
                   alt="User Avatar"

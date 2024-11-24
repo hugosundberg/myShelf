@@ -67,6 +67,7 @@
 .lowerNav ul {
     display: flex;
     gap: 40px;
+    padding-inline-start: 0px;
 }
 
 .navBar {
@@ -128,6 +129,28 @@
   
 .menu.open .line:nth-child(3) {
     transform: rotate(-45deg) translateY(-7px);
+}
+
+@media (max-width: 1024px) {
+    .title {
+        display: none;
+    }
+
+    .searchBar {
+        width: 250px;
+    }
+
+    .navMenu button {
+        padding-inline: 10px;
+    }
+
+    .myAccountButton .accountButtonText {
+        display: none;
+    }
+}
+
+@media (max-width: 622px) {
+    
 }
   
 
