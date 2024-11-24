@@ -81,6 +81,10 @@
 }
 
 .ratingContainer {
+    margin-top: 10px;
+    border: var(--accent-color) 2px solid ;
+    padding: 5px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -96,7 +100,7 @@
 .reviewContainer {
     background-color: white;
     width: 600px;
-    padding: 30px;
+    padding: 40px;
     border-radius: 20px;
     margin-top: 20px;
 }

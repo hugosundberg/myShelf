@@ -200,7 +200,6 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
                 <strong>Your rating: </strong>
               </p>
               <HalfRating handleRating={handleRating} value={rating} />
-              <p>{rating}</p>
             </div>
           </div>
         </div>
