@@ -191,7 +191,7 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
                 className={styles.reviewButton}
                 onClick={() => handleReview}
               >
-                <PiNotePencil />
+                <PiNotePencil className={styles.reviewIcon} />
                 Review
               </button>
             </div>
