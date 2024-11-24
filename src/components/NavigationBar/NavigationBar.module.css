@@ -145,13 +145,10 @@
     .navMenu button {
         padding-inline: 10px;
     }
-
-    .myAccountButton .accountButtonText {
-        display: none;
-    }
+  
 }
 
-@media (max-width: 622px) {
+@media (max-width: 625px) {
     .lowerNav ul {
         font-size: 15px;
         gap: 20px;
@@ -164,6 +161,10 @@
     .searchBar {
         font-size: 15px;
         width: 150px;
+    }
+
+    .myAccountButton .accountButtonText {
+        display: none;
     }
 }
   
