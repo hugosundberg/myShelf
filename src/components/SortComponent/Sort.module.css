@@ -1,26 +1,61 @@
 .sortContainer {
     background-color: white;
-    width: 45 0px;
-    padding: 20px;
+    max-width: 700px;
+    padding: 10px;
     border-radius: 10px;
     margin-bottom: 20px;
+    margin-inline: 20px;
     display: flex;
+    flex-direction: column;
+    gap: 10px;
     justify-content: space-between;
     align-items: center;
     color: black;
 }
 
+.sortTitle {
+    font-size: 20px;
+}
+
 .sortContainer button {
-    width: 120px;
+    max-width: 120px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: 10px;
     background-color: var(--primary-color);
     cursor: pointer;
+    gap: 10px;
 }
 
 .sortContainer button.active {
     background-color: black;
     font-weight: bold;
+}
+
+.sortButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.closeIcon {
+    scale: 1.5;
+}
+
+
+
+@media (max-width: 480px) {
+    .sortButtons {
+    
+        font-size: 12px;
+        gap: 5px;
+    }
+
+    .sortContainer button {
+        max-width: 80px;
+    }
+
+    .closeButton p {
+        display: none;
+    }
 }

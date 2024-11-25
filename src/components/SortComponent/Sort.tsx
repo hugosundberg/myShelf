@@ -36,41 +36,42 @@ const Sort = ({ setSortOption, setSortDirection }: SortProps) => {
 
   return (
     <div className={styles.sortContainer}>
-      <p>Sort by:</p>
+      <p className={styles.sortTitle}>
+        <strong>Sort by:</strong>
+      </p>
 
-      <button
-        className={activeButton === "author" ? styles.active : ""}
-        onClick={() => toggleButton("author")}
-      >
-        Author{" "}
-        {activeButton === "author" &&
-          (sortDirection === "asc" ? <SlArrowUp /> : <SlArrowDown />)}
-      </button>
-
-      <button
-        className={activeButton === "year" ? styles.active : ""}
-        onClick={() => toggleButton("year")}
-      >
-        Year{" "}
-        {activeButton === "year" &&
-          (sortDirection === "asc" ? <SlArrowUp /> : <SlArrowDown />)}
-      </button>
-
-      <button
-        className={activeButton === "rating" ? styles.active : ""}
-        onClick={() => toggleButton("rating")}
-      >
-        Rating{" "}
-        {activeButton === "rating" &&
-          (sortDirection === "asc" ? <SlArrowUp /> : <SlArrowDown />)}
-      </button>
-
-      {activeButton && (
-        <button className={styles.closeButton} onClick={resetSort}>
-          Clear
-          <RiCloseLine />
+      <div className={styles.sortButtons}>
+        <button
+          className={activeButton === "author" ? styles.active : ""}
+          onClick={() => toggleButton("author")}
+        >
+          Author{" "}
+          {activeButton === "author" &&
+            (sortDirection === "asc" ? <SlArrowUp /> : <SlArrowDown />)}
         </button>
-      )}
+        <button
+          className={activeButton === "year" ? styles.active : ""}
+          onClick={() => toggleButton("year")}
+        >
+          Year{" "}
+          {activeButton === "year" &&
+            (sortDirection === "asc" ? <SlArrowUp /> : <SlArrowDown />)}
+        </button>
+        <button
+          className={activeButton === "rating" ? styles.active : ""}
+          onClick={() => toggleButton("rating")}
+        >
+          Rating{" "}
+          {activeButton === "rating" &&
+            (sortDirection === "asc" ? <SlArrowUp /> : <SlArrowDown />)}
+        </button>
+        {activeButton && (
+          <button className={styles.closeButton} onClick={resetSort}>
+            <p>Close</p>
+            <RiCloseLine className={styles.closeIcon} />
+          </button>
+        )}
+      </div>
     </div>
   );
 };
