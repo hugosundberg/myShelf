@@ -24,7 +24,7 @@ export const SmallBookCard = ({
   const handleBookClick = (book: Book) => {
     if (setCurrentBook) setCurrentBook(book);
 
-    navigate(`/book/${book.id}`);
+    navigate(`/book`);
   };
 
   const handleAuthorClick = (book: Book) => {
