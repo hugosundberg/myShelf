@@ -204,16 +204,11 @@
     .lowerNav {
         display: none;
     }
-
-    .navMenu button {
+    .navMenu .myBooksButton {
         display: none;
     }
 
-    .myBooksButton {
-        display: none;
-    }
-
-    .myAccountButton {
+    .navMenu .myAccountButton {
         display: none;
     }
 
