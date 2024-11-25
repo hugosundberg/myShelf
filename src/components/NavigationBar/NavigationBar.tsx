@@ -98,6 +98,27 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 <div className={styles.line}></div>
                 <div className={styles.line}></div>
               </div>
+              {isMenuOpen && (
+                <div className={styles.dropdownMenu}>
+                  <ul>
+                    <li onClick={() => navigate("/category/fiction")}>
+                      Fiction
+                    </li>
+                    <li onClick={() => navigate("/category/non-fiction")}>
+                      Non-Fiction
+                    </li>
+                    <li onClick={() => navigate("/category/young-adult")}>
+                      Young Adult
+                    </li>
+                    <li onClick={() => navigate("/category/children")}>
+                      Children
+                    </li>
+                    <li onClick={() => navigate("/category/lifestyle")}>
+                      Lifestyle
+                    </li>
+                  </ul>
+                </div>
+              )}
             </>
           )}
         </div>
