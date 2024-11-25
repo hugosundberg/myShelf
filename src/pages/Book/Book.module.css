@@ -65,9 +65,8 @@
     background-color: white;
     padding: 30px;
     border-radius: 20px;
-    margin-top: 40px;
-    margin: 40px;
-    margin-bottom: 200px;
+    margin-top: 20px;
+    margin-inline: 20px;
 }
 
 .bookContainer h3:hover {
@@ -89,6 +88,8 @@
     border-radius: 10px;
     display: flex;
     align-items: center;
+    width: fit-content;
+    padding: 10px;
     gap: 10px;
 }
 
@@ -100,31 +101,40 @@
 }
 
 .reviewContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: white;
-    width: 600px;
-    padding: 40px;
+    padding: 30px;
     border-radius: 20px;
     margin-top: 20px;
+    margin-inline: 20px;
 }
 
-.reviewHeader {
+.reviewButtons {
     display: flex;
+    padding-top: 20px;
     gap: 10px;
 }
 
-.reviewHeader button { 
+.reviewButtons button {
+    width: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    height: fit-content;
-    width: fit-content;
-    background-color: var(--primary-color);
-    cursor: pointer;
+    gap: 10px;
 }
 
 .reviewContainer h2 {
     margin-top: 0;
+}
+
+@media (max-width: 1024px) {
+    .reviewContainer {
+        max-width: 80%;
+    }
+
 }
 
 
@@ -160,5 +170,7 @@
         object-fit: contain;
     }
 
-
+    .reviewButtons button {
+        width: 150px;
+    }
 }

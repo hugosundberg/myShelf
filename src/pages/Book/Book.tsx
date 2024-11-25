@@ -212,8 +212,9 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
       </div>
       {review !== "" && (
         <div className={styles.reviewContainer}>
-          <div className={styles.reviewHeader}>
-            <h2>Your review</h2>
+          <h2>Your review</h2>
+          <p>{review}</p>
+          <div className={styles.reviewButtons}>
             <button onClick={() => setIsReviewOpen(true)}>
               <PiNotePencil />
               Edit
@@ -227,7 +228,6 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
               Remove
             </button>
           </div>
-          <p>{review}</p>
         </div>
       )}
       <AuthPopup
