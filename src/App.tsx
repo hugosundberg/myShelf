@@ -93,7 +93,7 @@ const App: React.FC = () => {
         />
 
         <Route
-          path="/book"
+          path="/book/:id"
           element={
             currentBook ? (
               <Book

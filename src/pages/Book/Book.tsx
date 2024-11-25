@@ -4,7 +4,7 @@ import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { db, auth } from "../../utils/firebase";
 import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import HalfRating from "../../components/RatingComponent/RatingComponent";
 import { PiNotePencil } from "react-icons/pi";
 import ReviewPopup from "./ReviewPopup";
@@ -18,7 +18,12 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
   const [user, loading] = useAuthState(auth);
   const [isAuthPopupVisible, setIsAuthPopupVisable] = useState(false);
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!book) console.log("no book");
+  }, [book]);
 
   const handleSetRating = (number: number) => {
     setRating(number);

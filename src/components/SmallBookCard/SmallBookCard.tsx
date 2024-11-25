@@ -23,7 +23,8 @@ export const SmallBookCard = ({
 
   const handleBookClick = (book: Book) => {
     if (setCurrentBook) setCurrentBook(book);
-    navigate("/book");
+
+    navigate(`/book/${book.id}`);
   };
 
   const handleAuthorClick = (book: Book) => {

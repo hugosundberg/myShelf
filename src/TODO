@@ -1,5 +1,7 @@
 ## // KNOWN BUGS
 
+- Click author does not work as expected
+
 ## // TODO:
 
 - Add book id or search params to URL
