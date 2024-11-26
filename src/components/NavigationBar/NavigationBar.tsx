@@ -5,7 +5,6 @@ import { IoSearchOutline } from "react-icons/io5";
 import { PiBooksLight } from "react-icons/pi";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../utils/firebase";
-import { buttonBaseClasses } from "@mui/material";
 
 interface NavigationBarProps {
   handleSetSearchQuery: (query: string) => void;
@@ -104,12 +103,23 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   {!user ? (
                     <button onClick={() => navigate("/login")}>Sign In</button>
                   ) : (
-                    <div>
-                      <button onClick={() => navigate("/my-books")}>
+                    <div className={styles.dropDownButtons}>
+                      <button
+                        className={styles.dropdownMyBooks}
+                        onClick={() => navigate("/my-books")}
+                      >
                         My Books
                       </button>
-                      <button onClick={() => navigate("/account")}>
+                      <button
+                        className={styles.dropdownAccount}
+                        onClick={() => navigate("/account")}
+                      >
                         Account
+                        <img
+                          src={user.photoURL || ""}
+                          alt="User Avatar"
+                          className={styles.userAvatar}
+                        />
                       </button>
                     </div>
                   )}
