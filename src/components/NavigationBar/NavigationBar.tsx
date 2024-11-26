@@ -92,56 +92,63 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   className={styles.userAvatar}
                 />
               </button>
-              <div className={styles.hamburger} onClick={toggleMenu}>
+              <div
+                className={`${styles.hamburger} ${
+                  isMenuOpen ? styles.open : ""
+                }`}
+                onClick={toggleMenu}
+              >
                 {/* Hamburger Icon */}
                 <div className={styles.line}></div>
                 <div className={styles.line}></div>
                 <div className={styles.line}></div>
               </div>
-              {isMenuOpen && (
-                <div className={styles.dropdownMenu}>
-                  {!user ? (
-                    <button onClick={() => navigate("/login")}>Sign In</button>
-                  ) : (
-                    <div className={styles.dropDownButtons}>
-                      <button
-                        className={styles.dropdownMyBooks}
-                        onClick={() => navigate("/my-books")}
-                      >
-                        My Books
-                      </button>
-                      <button
-                        className={styles.dropdownAccount}
-                        onClick={() => navigate("/account")}
-                      >
-                        Account
-                        <img
-                          src={user.photoURL || ""}
-                          alt="User Avatar"
-                          className={styles.userAvatar}
-                        />
-                      </button>
-                    </div>
-                  )}
-                  <ul>
-                    <li onClick={() => navigate("/category/fiction")}>
-                      Fiction
-                    </li>
-                    <li onClick={() => navigate("/category/non-fiction")}>
-                      Non-Fiction
-                    </li>
-                    <li onClick={() => navigate("/category/young-adult")}>
-                      Young Adult
-                    </li>
-                    <li onClick={() => navigate("/category/children")}>
-                      Children
-                    </li>
-                    <li onClick={() => navigate("/category/lifestyle")}>
-                      Lifestyle
-                    </li>
-                  </ul>
-                </div>
-              )}
+
+              <div
+                className={`${styles.dropdownMenu} ${
+                  isMenuOpen ? styles.visible : styles.hidden
+                }`}
+              >
+                {!user ? (
+                  <button onClick={() => navigate("/login")}>Sign In</button>
+                ) : (
+                  <div className={styles.dropDownButtons}>
+                    <button
+                      className={styles.dropdownMyBooks}
+                      onClick={() => navigate("/my-books")}
+                    >
+                      My Books
+                    </button>
+                    <button
+                      className={styles.dropdownAccount}
+                      onClick={() => navigate("/account")}
+                    >
+                      Account
+                      <img
+                        src={user.photoURL || ""}
+                        alt="User Avatar"
+                        className={styles.userAvatar}
+                      />
+                    </button>
+                  </div>
+                )}
+
+                <ul>
+                  <li onClick={() => navigate("/category/fiction")}>Fiction</li>
+                  <li onClick={() => navigate("/category/non-fiction")}>
+                    Non-Fiction
+                  </li>
+                  <li onClick={() => navigate("/category/young-adult")}>
+                    Young Adult
+                  </li>
+                  <li onClick={() => navigate("/category/children")}>
+                    Children
+                  </li>
+                  <li onClick={() => navigate("/category/lifestyle")}>
+                    Lifestyle
+                  </li>
+                </ul>
+              </div>
             </>
           )}
         </div>

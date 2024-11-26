@@ -31,7 +31,7 @@
 .listItemContainer {
     padding: 0px;
     margin: 0px;
-
+    height: 250px;
 }
 
 .listPosition {
@@ -52,3 +52,12 @@
     margin: 0px;
 }
 
+@media (max-width: 480px) {
+    .listItemContainer {
+        height: 200px;
+    }
+
+    .contentBody {
+        top: 70px;
+    }
+}
