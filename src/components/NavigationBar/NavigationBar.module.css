@@ -196,7 +196,7 @@
     }
 
     .navMenu button {
-        padding-inline: 10px;
+        padding-inline: 20px;
     }
   
 }
@@ -235,6 +235,10 @@
     }
 
     .navMenu .myAccountButton {
+        display: none;
+    }
+
+    .navMenu .signInButton {
         display: none;
     }
 

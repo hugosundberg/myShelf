@@ -93,70 +93,67 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   className={styles.userAvatar}
                 />
               </button>
-              <div
-                className={`${styles.hamburger} ${
-                  isMenuOpen ? styles.open : ""
-                }`}
-                onClick={toggleMenu}
-              >
-                {/* Hamburger Icon */}
-                <div className={styles.line}></div>
-                <div className={styles.line}></div>
-                <div className={styles.line}></div>
-              </div>
-
-              <div
-                className={`${styles.dropdownMenu} ${
-                  isMenuOpen ? styles.visible : styles.hidden
-                }`}
-              >
-                {!user ? (
-                  <button
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      navigate("/login");
-                    }}
-                  >
-                    Sign In
-                  </button>
-                ) : (
-                  <div className={styles.dropDownButtons}>
-                    <button
-                      className={styles.dropdownMyBooks}
-                      onClick={() => {
-                        setIsMenuOpen(false);
-                        navigate("/my-books");
-                      }}
-                    >
-                      My Books
-                    </button>
-                    <button
-                      className={styles.dropdownAccount}
-                      onClick={() => {
-                        setIsMenuOpen(false);
-                        navigate("/account");
-                      }}
-                    >
-                      Account
-                      <img
-                        src={user.photoURL || ""}
-                        alt="User Avatar"
-                        className={styles.userAvatar}
-                      />
-                    </button>
-                  </div>
-                )}
-
-                <ul>
-                  <li onClick={() => handleCategoryClick(0)}>Fiction</li>
-                  <li onClick={() => handleCategoryClick(1)}>Non-Fiction</li>
-                  <li onClick={() => handleCategoryClick(25)}>Young Adult</li>
-                  <li onClick={() => handleCategoryClick(17)}>Children</li>
-                  <li onClick={() => handleCategoryClick(55)}>Lifestyle</li>
-                </ul>
-              </div>
             </>
           )}
+          <div
+            className={`${styles.dropdownMenu} ${
+              isMenuOpen ? styles.visible : styles.hidden
+            }`}
+          >
+            {!user ? (
+              <button
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  navigate("/login");
+                }}
+              >
+                Sign In
+              </button>
+            ) : (
+              <div className={styles.dropDownButtons}>
+                <button
+                  className={styles.dropdownMyBooks}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    navigate("/my-books");
+                  }}
+                >
+                  My Books
+                </button>
+                <button
+                  className={styles.dropdownAccount}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    navigate("/account");
+                  }}
+                >
+                  Account
+                  <img
+                    src={user.photoURL || ""}
+                    alt="User Avatar"
+                    className={styles.userAvatar}
+                  />
+                </button>
+              </div>
+            )}
+
+            <ul>
+              <li onClick={() => handleCategoryClick(0)}>Fiction</li>
+              <li onClick={() => handleCategoryClick(1)}>Non-Fiction</li>
+              <li onClick={() => handleCategoryClick(25)}>Young Adult</li>
+              <li onClick={() => handleCategoryClick(17)}>Children</li>
+              <li onClick={() => handleCategoryClick(55)}>Lifestyle</li>
+            </ul>
+          </div>
+          <div
+            className={`${styles.hamburger} ${isMenuOpen ? styles.open : ""}`}
+            onClick={toggleMenu}
+          >
+            {/* Hamburger Icon */}
+            <div className={styles.line}></div>
+            <div className={styles.line}></div>
+            <div className={styles.line}></div>
+          </div>
         </div>
       </div>
       <div className={styles.lowerNav}>
