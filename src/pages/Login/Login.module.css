@@ -41,3 +41,13 @@
     color: rgb(69, 69, 254);
 }
 
+@media (max-width: 480px) {
+    .loginContainer {
+        width: 80%;
+    }
+
+    .loginButton {
+        min-width: 0px;
+        width: 100%;
+    }
+}
