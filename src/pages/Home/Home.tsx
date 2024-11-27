@@ -3,6 +3,7 @@ import styles from "./Home.module.css";
 import { useEffect, useRef, useState } from "react";
 import { BestSellerBookCard } from "../../components/BestSellerBookCard/BestSellerBookCard";
 import { CircularProgress } from "@mui/material";
+import shelf2 from "../../assets/shelf2.webp";
 
 interface HomeProps {
   setCurrentBook: (book: Book) => void;
@@ -72,32 +73,37 @@ const Home: React.FC<HomeProps> = ({
   const booksToDisplay = topBooks[currentCategory] || [];
 
   return (
-    <div className={styles.contentBody}>
-      <h1 className={styles.title}>New York Times Bestsellers</h1>
-      {error && <div className={styles.error}>{error}</div>}
-      {loading ? (
-        <CircularProgress
-          color="inherit"
-          style={{ position: "absolute", top: "200px", padding: 0 }}
-        />
-      ) : (
-        <h2 className={styles.title}>
-          {stringFormatter(currentCategory)} bestsellers
-        </h2>
-      )}
-      <div className={styles.bookContainer}>
-        {booksToDisplay.map((book, index) => (
-          <div className={styles.listItemContainer} key={index}>
-            <h2 className={styles.listPosition}>{index + 1}</h2>
-            <BestSellerBookCard
-              book={book}
-              setCurrentBook={setCurrentBook}
-              setCurrentAuthor={setCurrentAuthor}
-            />
-          </div>
-        ))}
+    <>
+      <div className={styles.header}>
+        <img src={shelf2} alt="" />
+        <h1 className={styles.largeTitle}>New York Times Bestsellers</h1>
+        {error && <div className={styles.error}>{error}</div>}
       </div>
-    </div>
+      <div className={styles.contentBody}>
+        {loading ? (
+          <CircularProgress
+            color="inherit"
+            style={{ position: "absolute", top: "200px", padding: 0 }}
+          />
+        ) : (
+          <h2 className={styles.title}>
+            {stringFormatter(currentCategory)} bestsellers
+          </h2>
+        )}
+        <div className={styles.bookContainer}>
+          {booksToDisplay.map((book, index) => (
+            <div className={styles.listItemContainer} key={index}>
+              <h2 className={styles.listPosition}>{index + 1}</h2>
+              <BestSellerBookCard
+                book={book}
+                setCurrentBook={setCurrentBook}
+                setCurrentAuthor={setCurrentAuthor}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 
