@@ -35,6 +35,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   };
 
   const handleCategoryClick = (number: number) => {
+    setIsMenuOpen(false);
     setBestSellerListIndex(number);
     navigate("/");
   };
@@ -110,18 +111,31 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 }`}
               >
                 {!user ? (
-                  <button onClick={() => navigate("/login")}>Sign In</button>
+                  <button
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      navigate("/login");
+                    }}
+                  >
+                    Sign In
+                  </button>
                 ) : (
                   <div className={styles.dropDownButtons}>
                     <button
                       className={styles.dropdownMyBooks}
-                      onClick={() => navigate("/my-books")}
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        navigate("/my-books");
+                      }}
                     >
                       My Books
                     </button>
                     <button
                       className={styles.dropdownAccount}
-                      onClick={() => navigate("/account")}
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        navigate("/account");
+                      }}
                     >
                       Account
                       <img
@@ -134,19 +148,11 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 )}
 
                 <ul>
-                  <li onClick={() => navigate("/category/fiction")}>Fiction</li>
-                  <li onClick={() => navigate("/category/non-fiction")}>
-                    Non-Fiction
-                  </li>
-                  <li onClick={() => navigate("/category/young-adult")}>
-                    Young Adult
-                  </li>
-                  <li onClick={() => navigate("/category/children")}>
-                    Children
-                  </li>
-                  <li onClick={() => navigate("/category/lifestyle")}>
-                    Lifestyle
-                  </li>
+                  <li onClick={() => handleCategoryClick(0)}>Fiction</li>
+                  <li onClick={() => handleCategoryClick(1)}>Non-Fiction</li>
+                  <li onClick={() => handleCategoryClick(25)}>Young Adult</li>
+                  <li onClick={() => handleCategoryClick(17)}>Children</li>
+                  <li onClick={() => handleCategoryClick(55)}>Lifestyle</li>
                 </ul>
               </div>
             </>

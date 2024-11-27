@@ -46,16 +46,16 @@
 
 @media (max-width: 480px) {
     .sortButtons {
-    
         font-size: 12px;
         gap: 5px;
     }
 
-    .sortContainer button {
-        max-width: 80px;
-    }
-
     .closeButton p {
         display: none;
+    }
+
+    .sortContainer {
+        min-width: 280px;
+        width: 70%;
     }
 }
