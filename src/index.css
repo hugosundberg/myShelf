@@ -1,3 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+/*
+FONTS
+
+Inter
+Lora
+Montserrat
+Raleway
+
+  --primary-color: #2C1320;
+  --secondary-color: #3E442B;
+  --third-color: #FAE1DF;
+  --accent-color: #776472;
+  --accent-color2: #2C1320;
+
+*/
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -20,14 +39,17 @@
 }
 
 p {
+  font-family: "Raleway";
   margin: 0;
 }
 
 a {
+  font-family: "Raleway";
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -41,8 +63,17 @@ body, html {
 }
 
 h1 {
+  font-family: "Lora";
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+h2 {
+  font-family: "Raleway";
+}
+
+li {
+  font-family: "Raleway";
 }
 
 button {
@@ -51,7 +82,7 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
+  font-family: "Raleway";
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;

@@ -184,8 +184,6 @@
     transform: rotate(-45deg) translateX(7px) translateY(-7px);
 }
 
-
-
 @media (max-width: 1024px) {
     .title {
         display: none;
