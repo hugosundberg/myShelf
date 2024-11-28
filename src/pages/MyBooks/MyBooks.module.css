@@ -6,7 +6,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--accent-color2);
+    background-color: var(--primary-color);
 }
 
 .collectionBody {
@@ -25,6 +25,12 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
+}
+
+.shelf {
+    margin-top: -65px;
+    height: 100px;
+    width: 90vw;
 }
 
 .customDropdown {
