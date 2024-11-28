@@ -15,7 +15,7 @@
     flex-direction: row;
     justify-content: center;
     gap: 40px;
-    row-gap: 60px;
+    row-gap: 130px;
     padding-inline: 20px;
     max-width: 2000px;
 
@@ -33,7 +33,7 @@
 
 .listItemContainer {
     padding: 0px;
-    margin: 0px;
+    margin-top: -60px;
     height: 280px;
 }
 
@@ -64,15 +64,16 @@
 }
 
 .listPosition {
-    background-color: var(--accent-color2);
-    color: var(--accent-color);
+    background-color: var(--accent-color3);
+    color: var(--accent-color2);
+    color: white;
     position: relative;
     border: var(--accent-color3) 6px solid;
     display: flex;
     align-items: center;
     justify-content: center;
     top: 310px;
-    left: 340px;
+    left: 390px;
     z-index: 999;
     padding: 20px;
     width: 30px;

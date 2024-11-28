@@ -1,7 +1,7 @@
 .bookCard {
     background-color: white;
     height: 240px;
-    width: 360px;
+    width: 400px;
     border-radius: 20px;
     padding: 30px;
     display: flex;
@@ -10,13 +10,13 @@
 }
 
 .bookCardContent {
-    margin-left: 10px;
+    margin-left: 20px;
     position: relative;
     width: 100%;
 }
 
 .bookCard h2 {
-    font-size: large;
+    font-size: 25px;
     padding: 0;
     margin: 0;
     text-align: left;             
@@ -33,7 +33,7 @@
 .bookCard p {
     padding: 0;
     margin: 0;
-    font-size: 14px;
+    font-size: 20px;
     max-width: 80%;    
     overflow: hidden;             
     max-height: 4.5em;              
@@ -100,5 +100,11 @@
         width: 280px;
         height: 150px;
     }
+
+    .bookCard h2 {
+        font-size: large;
+    }
+
+    
 }
 

@@ -93,7 +93,7 @@ const Home: React.FC<HomeProps> = ({
         <div className={styles.bookContainer}>
           {booksToDisplay.map((book, index) => (
             <div className={styles.listItemContainer} key={index}>
-              <h2 className={styles.listPosition}>{index + 1}</h2>
+              <h2 className={styles.listPosition}>#{index + 1}</h2>
               <BestSellerBookCard
                 book={book}
                 setCurrentBook={setCurrentBook}
