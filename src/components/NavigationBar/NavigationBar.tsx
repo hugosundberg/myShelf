@@ -45,7 +45,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
       <div className={styles.upperNav}>
         <div className={styles.logoContainer} onClick={() => navigate("/")}>
           <PiBooksLight className={styles.logo} />
-          <h2 className={styles.title}>MyShelf</h2>
+          <h2 className={styles.title}>MYSHELF</h2>
         </div>
         <div className={styles.searchContainer}>
           <input

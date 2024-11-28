@@ -1,13 +1,12 @@
 .bookCard {
     background-color: white;
-    height: 200px;
-    width: 300px;
+    height: 240px;
+    width: 360px;
     border-radius: 20px;
-    padding: 20px;
+    padding: 30px;
     display: flex;
     color: var(--primary-color);
     position: relative; 
-    border: var(--secondary-color) solid 2px;
 }
 
 .bookCardContent {
@@ -17,7 +16,7 @@
 }
 
 .bookCard h2 {
-    font-size: medium;
+    font-size: large;
     padding: 0;
     margin: 0;
     text-align: left;             
@@ -62,10 +61,13 @@
     height: 100%; 
     object-fit: cover; 
     max-width: 160px;
+    box-shadow: -10px 5px 25px var(--primary-color);
+    transition: all .3s ease-in-out;
 }
 
 .bookImg:hover {
     cursor: pointer;
+    scale: 1.04;
 }
 
 .likeButton {
@@ -95,8 +97,8 @@
 @media (max-width: 480px) {
 
     .bookCard {
+        width: 280px;
         height: 150px;
     }
-    
 }
 

@@ -14,12 +14,16 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    gap: 30px;
+    gap: 40px;
+    row-gap: 60px;
     padding-inline: 20px;
     max-width: 2000px;
+
 }
 
 .title {
+    color: var(--accent-color2);
+    text-shadow: -5px 5px 100px black, 1px 0px 20px black, 0px 0 black, 0px 0px black;
     margin: 0px;
     margin-top: 20px;
     font-size: 40px;
@@ -30,7 +34,7 @@
 .listItemContainer {
     padding: 0px;
     margin: 0px;
-    height: 250px;
+    height: 280px;
 }
 
 .header {
@@ -53,27 +57,29 @@
 
 .largeTitle {
     position: relative;
+    color: var(--accent-color2);
     font-size: 75px;
     top: -200px;
-    text-shadow: -5px 5px 10px black, 1px 0px 20px black, 0px 0 black, 0px 0px black;
+    text-shadow: -5px 5px 60px var(--accent-color), 1px 0px 20px black, 0px 0 black, 0px 0px black;
 }
 
 .listPosition {
-    background-color: var(--accent-color);
-    color: white;
+    background-color: var(--accent-color2);
+    color: var(--accent-color);
     position: relative;
-    border: white 2px solid;
+    border: var(--accent-color3) 6px solid;
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 50px;
-    right: 20px;
+    top: 310px;
+    left: 340px;
     z-index: 999;
     padding: 20px;
     width: 30px;
     height: 30px;
     border-radius: 200px;
     margin: 0px;
+    scale: 1.2;
 }
 
 @media (max-width: 1024px) {
@@ -98,6 +104,11 @@
 @media (max-width: 480px) {
     .listItemContainer {
         height: 200px;
+    }
+
+    .listPosition {
+        top: 220px;
+        left: 270px;
     }
 
     .header {

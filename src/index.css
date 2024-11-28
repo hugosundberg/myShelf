@@ -15,6 +15,13 @@ Raleway
   --accent-color: #776472;
   --accent-color2: #2C1320;
 
+  B38034
+  7D886E
+  87492C
+  37514D
+  DBE2d2
+  A17356
+
 */
 
 :root {
@@ -31,11 +38,12 @@ Raleway
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --primary-color: #313E50;
-  --secondary-color: #3A435E;
-  --third-color: #455561;
-  --accent-color: #5C6672;
-  --accent-color2: #cfdbd513;
+  --primary-color: #37514D;
+  --secondary-color: #7D886E;
+  --third-color: #A17356;
+  --accent-color: #87492C;
+  --accent-color2: #DBE2d2;
+  --accent-color3: #B3803F;
 }
 
 p {
