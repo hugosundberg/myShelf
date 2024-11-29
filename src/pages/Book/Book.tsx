@@ -90,13 +90,13 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
   };
 
   const handleLogin = () => {
-    navigate("/login");
+    navigate("/myShelf/login");
   };
 
   const handleAuthorClick = () => {
     const author = Array.isArray(book.author) ? book.author[0] : book.author;
     setCurrentAuthor(author);
-    navigate("/search");
+    navigate("/myShelf/search");
   };
 
   const handleBookLike = async () => {

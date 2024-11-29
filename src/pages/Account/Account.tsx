@@ -57,7 +57,7 @@ const Account: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!user) navigate("/login");
+    if (!user) navigate("/myShelf/login");
   }, [user]);
 
   if (loading) return <h1>Loading...</h1>;

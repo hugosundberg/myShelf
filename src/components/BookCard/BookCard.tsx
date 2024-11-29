@@ -22,7 +22,7 @@ export const BookCard = ({
 
   const handleBookClick = (book: Book) => {
     if (setCurrentBook) setCurrentBook(book);
-    navigate("/book");
+    navigate("/myShelf/book");
   };
 
   const handleAuthorClick = (book: Book) => {

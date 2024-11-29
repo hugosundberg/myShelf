@@ -4,13 +4,9 @@
 
 ## // TODO:
 
-- Add book id or search params to URL
-
-- Redesign
-- Responsiveness (Hamburger menu started)w
-
 ## // NON ESSENTIALS:
 
+- Add book id or search params to URL
 - Add sort in search results
 - Add Facebook auth
 - Sort by category in MyBooks

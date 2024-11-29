@@ -12,7 +12,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) navigate("/account");
+    if (user) navigate("/myShelf/account");
   }, [user, navigate]);
 
   const handleAddUser = async (user: User) => {
@@ -36,7 +36,7 @@ const Login: React.FC = () => {
       const result = await signInWithPopup(auth, googleProvider);
       if (result.user) {
         await handleAddUser(result.user); // Ensure user is added to Firestore
-        navigate("/account");
+        navigate("/myShelf/account");
       }
     } catch (error) {
       console.error("Google sign-in error:", error);

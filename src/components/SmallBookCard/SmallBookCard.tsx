@@ -24,13 +24,13 @@ export const SmallBookCard = ({
   const handleBookClick = (book: Book) => {
     if (setCurrentBook) setCurrentBook(book);
 
-    navigate(`/book`);
+    navigate(`/myShelf/book`);
   };
 
   const handleAuthorClick = (book: Book) => {
     const author = Array.isArray(book.author) ? book.author[0] : book.author;
     setCurrentAuthor(author);
-    navigate("/search");
+    navigate("/myShelf/search");
   };
 
   const handleBookLike = async () => {

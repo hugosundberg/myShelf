@@ -31,19 +31,22 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   const handleSearch = () => {
     if (!input) return;
     handleSetSearchQuery(input);
-    navigate("/search");
+    navigate("/myShelf/search");
   };
 
   const handleCategoryClick = (number: number) => {
     setIsMenuOpen(false);
     setBestSellerListIndex(number);
-    navigate("/");
+    navigate("/myShelf/");
   };
 
   return (
     <div className={styles.navBar}>
       <div className={styles.upperNav}>
-        <div className={styles.logoContainer} onClick={() => navigate("/")}>
+        <div
+          className={styles.logoContainer}
+          onClick={() => navigate("/myShelf/")}
+        >
           <PiBooksLight className={styles.logo} />
           <h2 className={styles.title}>MYSHELF</h2>
         </div>
@@ -70,7 +73,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           {!user ? (
             <button
               className={styles.signInButton}
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/myShelf/login")}
             >
               Sign In
             </button>
@@ -78,13 +81,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <>
               <button
                 className={styles.myBooksButton}
-                onClick={() => navigate("/my-books")}
+                onClick={() => navigate("/myShelf/my-books")}
               >
                 My Books
               </button>
               <button
                 className={styles.myAccountButton}
-                onClick={() => navigate("/account")}
+                onClick={() => navigate("/myShelf/account")}
               >
                 <span className={styles.accountButtonText}>Account</span>
                 <img
@@ -104,7 +107,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               <button
                 onClick={() => {
                   setIsMenuOpen(false);
-                  navigate("/login");
+                  navigate("/myShelf/login");
                 }}
               >
                 Sign In
@@ -115,7 +118,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   className={styles.dropdownMyBooks}
                   onClick={() => {
                     setIsMenuOpen(false);
-                    navigate("/my-books");
+                    navigate("/myShelf/my-books");
                   }}
                 >
                   My Books
@@ -124,7 +127,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   className={styles.dropdownAccount}
                   onClick={() => {
                     setIsMenuOpen(false);
-                    navigate("/account");
+                    navigate("/myShelf/account");
                   }}
                 >
                   Account

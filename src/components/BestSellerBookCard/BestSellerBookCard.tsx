@@ -17,7 +17,7 @@ export const BestSellerBookCard = ({
       try {
         const fetchedBook = await booksAPI.fetchVolumeByISBN({ isbn });
         if (setCurrentBook) setCurrentBook(fetchedBook);
-        navigate("/book");
+        navigate("/myShelf/book");
       } catch (error) {
         console.error("Error: ", error);
       }
@@ -27,7 +27,7 @@ export const BestSellerBookCard = ({
   const handleAuthorClick = (book: Book) => {
     const author = Array.isArray(book.author) ? book.author[0] : book.author;
     setCurrentAuthor(author);
-    navigate("/search");
+    navigate("/myShelf/search");
   };
 
   return (

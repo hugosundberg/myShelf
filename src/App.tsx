@@ -82,7 +82,7 @@ const App: React.FC = () => {
       />
       <Routes>
         <Route
-          path="/"
+          path="/myShelf"
           element={
             <Home
               setCurrentAuthor={setCurrentAuthor}
@@ -93,7 +93,7 @@ const App: React.FC = () => {
         />
 
         <Route
-          path="/book"
+          path="/myShelf/book"
           element={
             currentBook ? (
               <Book
@@ -106,10 +106,10 @@ const App: React.FC = () => {
           }
         />
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/account" element={<Account />} />
+        <Route path="/myShelf/login" element={<Login />} />
+        <Route path="/myShelf/account" element={<Account />} />
         <Route
-          path="/my-books"
+          path="/myShelf/my-books"
           element={
             <MyBooks
               setCurrentBook={setCurrentBook}
@@ -119,7 +119,7 @@ const App: React.FC = () => {
         />
 
         <Route
-          path="/search"
+          path="/myShelf/search"
           element={
             <SearchResult
               setCurrentBook={handleSetCurrentBook}
