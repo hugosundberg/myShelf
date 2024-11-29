@@ -215,7 +215,15 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
           <h2>Your review</h2>
           <p>{review}</p>
           <div className={styles.reviewButtons}>
-            <button onClick={() => setIsReviewOpen(true)}>
+            <button
+              onClick={() => {
+                if (!user) {
+                  setIsAuthPopupVisable(true);
+                } else {
+                  setIsReviewOpen(true);
+                }
+              }}
+            >
               <PiNotePencil />
               Edit
             </button>
