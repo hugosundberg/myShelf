@@ -1,0 +1,175 @@
+.contentBody {
+    background-color: var(--primary-color);
+    width: 100%;
+    height: 100%;
+    top: 120px;
+    padding-bottom: 40px;
+    position: relative;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.infoHeader {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.bookContainer h2 {
+    margin: 0;
+    max-width: 400px;
+}
+
+.bookContainer h3 {
+    margin: 0;
+}
+
+.contentBody img {
+    height: 100%;
+    margin-bottom: 10px;
+}
+
+.likeButton {
+    display: flex;
+    align-items: center;
+    color: white;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    width: fit-content;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-right: 25px;
+    cursor: pointer; 
+    gap: 15px;
+}
+
+.heart {
+    color: white;
+    scale: 1.5;
+}
+
+.heartActive {
+    color: rgb(183, 0, 0);
+    scale: 1.5;
+}
+
+.reviewIcon {
+    scale: 1.5;
+}
+
+.bookContainer {
+    height: fit-content;
+    max-width: 800px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-inline: 20px;
+}
+
+.bookContainer h3:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.bookButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.ratingContainer {
+    margin-top: 10px;
+    border: var(--accent-color) 2px solid ;
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 10px;
+    gap: 10px;
+}
+
+.reviewButton {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    background-color: var(--primary-color);
+}
+
+.reviewContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-inline: 20px;
+}
+
+.reviewButtons {
+    display: flex;
+    padding-top: 20px;
+    gap: 10px;
+}
+
+.reviewButtons button {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.reviewContainer h2 {
+    margin-top: 0;
+}
+
+@media (max-width: 1024px) {
+    .reviewContainer {
+        max-width: 80%;
+    }
+
+}
+
+@media (max-width: 625px) {
+
+    .bookButtonsContainer {
+        flex-direction: column;
+        align-items: baseline;
+        gap: 0px;
+        font-size: 14px;
+    }
+
+    .bookButtonsContainer button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .contentBody {
+        top: 70px;
+    }
+
+    .bookContainer {
+        max-width: 80%;
+    }
+
+    .infoHeader {
+        flex-direction: column;
+    }
+
+    .infoHeader img {
+        max-height: 250px;
+        object-fit: contain;
+    }
+
+    .reviewButtons button {
+        width: 150px;
+    }
+}
