@@ -1,0 +1,16 @@
+## // KNOWN BUGS
+
+- Click author does not work as expected
+
+## // TODO:
+
+- Add book id or search params to URL
+
+- Redesign
+- Responsiveness (Hamburger menu started)w
+
+## // NON ESSENTIALS:
+
+- Add sort in search results
+- Add Facebook auth
+- Sort by category in MyBooks

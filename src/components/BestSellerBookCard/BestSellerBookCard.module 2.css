@@ -1,0 +1,110 @@
+.bookCard {
+    background-color: white;
+    height: 240px;
+    width: 400px;
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    color: var(--primary-color);
+    position: relative; 
+}
+
+.bookCardContent {
+    margin-left: 20px;
+    position: relative;
+    width: 100%;
+}
+
+.bookCard h2 {
+    font-size: 25px;
+    padding: 0;
+    margin: 0;
+    text-align: left;             
+    overflow: hidden;             
+    max-height: 4.5em;              
+    line-height: 1.5em; 
+}
+
+.bookCard h2:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.bookCard p {
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    max-width: 80%;    
+    overflow: hidden;             
+    max-height: 4.5em;              
+    line-height: 1.5em;  
+    margin-top: 5px;
+}
+
+.author:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.noBookImgContainer {
+    height: 130px;
+    width: 65px;
+    background-color: black;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 12px;
+}
+
+.bookImg {
+    border-radius: 5px;
+    height: 100%; 
+    object-fit: cover; 
+    max-width: 160px;
+    box-shadow: -10px 5px 25px var(--primary-color);
+    transition: all .3s ease-in-out;
+}
+
+.bookImg:hover {
+    cursor: pointer;
+    scale: 1.04;
+}
+
+.likeButton {
+    cursor: pointer; 
+    background-color: transparent;
+    margin-top: 10px;
+}
+
+.ratingLikeContainer {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+    align-items: center;
+}
+
+.heart {
+    color: black;
+    scale: 1.5;
+}
+
+.heartActive {
+    color: rgb(183, 0, 0);
+    scale: 1.5;
+}
+
+@media (max-width: 480px) {
+
+    .bookCard {
+        width: 280px;
+        height: 150px;
+    }
+
+    .bookCard h2 {
+        font-size: large;
+    }
+
+    
+}
+

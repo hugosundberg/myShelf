@@ -1,0 +1,16 @@
+.contentBody {
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    top: 120px;
+    color: white;
+    position: relative;
+    align-items: center;
+}
+
+.pagination {
+    margin-top: 0px;
+    padding: 20px;
+}
