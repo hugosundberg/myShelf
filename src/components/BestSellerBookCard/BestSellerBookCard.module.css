@@ -60,7 +60,7 @@
     border-radius: 5px;
     height: 100%; 
     object-fit: cover; 
-    max-width: 160px;
+    max-width: 220px;
     box-shadow: -10px 5px 25px var(--primary-color);
     transition: all .3s ease-in-out;
 }

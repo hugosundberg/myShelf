@@ -255,3 +255,10 @@
     }
     
 }
+
+@media (max-width: 425px) {
+    .searchBar {
+        width: 180px;
+    }    
+
+}
