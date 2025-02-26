@@ -10,3 +10,4 @@ export default defineConfig({
     outDir: 'dist', // Optional: Customize the output directory
   },
 })
+3
