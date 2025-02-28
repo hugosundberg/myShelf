@@ -191,7 +191,9 @@ const Book: React.FC<BookProps> = ({ book, setCurrentAuthor }: BookProps) => {
               )}
               <button
                 className={styles.reviewButton}
-                onClick={() => setIsReviewOpen(true)}
+                onClick={() => {
+                  user ? setIsReviewOpen(true) : setIsAuthPopupVisable(true);
+                }}
               >
                 <PiNotePencil className={styles.reviewIcon} />
                 Review
