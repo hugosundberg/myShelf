@@ -19,7 +19,7 @@ const AuthPopup: React.FC<AuthPopupProps> = ({ isOpen, onLogin, onCancel }) => {
             className={styles.closeButton}
             onClick={onCancel}
           />
-        </div>
+        </div>e
 
         <p>Adding, rating and reviewing books requires logging in. </p>
         <div className={styles.buttons}>
