@@ -95,16 +95,17 @@
 }
 
 @media (max-width: 480px) {
-
     .bookCard {
         width: 280px;
         height: 150px;
     }
-
     .bookCard h2 {
         font-size: large;
     }
 
-    
+    .bookCardContent {
+        margin-left: 10px;
+    }
+
 }
 
