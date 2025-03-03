@@ -65,7 +65,7 @@ const Home: React.FC<HomeProps> = ({
       setError(null);
     } catch (err) {
       setError("Failed to fetch bestsellers. Please try again later.");
-      console.error("Error fetching books: ", err);
+      console.error("Error fetching books in API: ", err);
     }
   };
 

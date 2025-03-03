@@ -1,3 +1,5 @@
+import { log } from "console";
+
 const API_KEY = import.meta.env.VITE_NYT_API_KEY;
 
 const BASE_URL =
@@ -14,6 +16,12 @@ const fetchLatestBestsellers = async (): Promise<{
     const response = await fetch(`${BASE_URL}${API_KEY}`);
 
     const data = await response.json();
+
+    console.log(data);
+
+    console.log(data.results.lists[6].books);
+    
+    
 
     const topFictionBooks: Book[] = data.results.lists[0].books.map(
       (book: any) => ({
@@ -55,7 +63,7 @@ const fetchLatestBestsellers = async (): Promise<{
       })
     );
 
-    const topLifestyleBooks: Book[] = data.results.lists[13].books.map(
+    const topLifestyleBooks: Book[] = data.results.lists[6].books.map(
       (book: any) => ({
         id: "",
         title: book.title,
