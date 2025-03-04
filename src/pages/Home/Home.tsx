@@ -43,9 +43,27 @@ const Home: React.FC<HomeProps> = ({
 
   useEffect(() => {
     if (hasRun.current) return;
-    getBestsellers();
+    getCachedBestsellers();
     hasRun.current = true;
   }, []);
+
+  const getCachedBestsellers = () => {
+    const cachedData = localStorage.getItem("bestsellers");
+    const cachedTimestamp = localStorage.getItem("bestsellersTimestamp");
+
+    if (cachedData && cachedTimestamp) {
+      const now = new Date().getTime();
+      const oneDay = 24 * 60 * 60 * 1000;
+
+      if (now - parseInt(cachedTimestamp) < oneDay) {
+        setTopBooks(JSON.parse(cachedData));
+        setLoading(false);
+        return;
+      }
+    }
+
+    getBestsellers();
+  };
 
   const getBestsellers = async () => {
     setLoading(true);
@@ -53,13 +71,17 @@ const Home: React.FC<HomeProps> = ({
     try {
       const bestsellers = await nytAPI.fetchLatestBestsellers();
 
-      setTopBooks({
+      const topBooksData = {
         fiction: bestsellers.topFictionBooks,
         nonFiction: bestsellers.topNonFictionBooks,
         youngAdult: bestsellers.topYoungAdultBooks,
         children: bestsellers.topChildrenBooks,
         lifestyle: bestsellers.topLifestyleBooks,
-      });
+      };
+
+      setTopBooks(topBooksData);
+      localStorage.setItem("bestsellers", JSON.stringify(topBooksData));
+      localStorage.setItem("bestsellersTimestamp", new Date().getTime().toString());
 
       setLoading(false);
       setError(null);
