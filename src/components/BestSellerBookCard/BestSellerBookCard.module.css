@@ -103,12 +103,17 @@
         height: 150px;
     }
     .bookCard h2 {
-        font-size: large;
+        font-size: medium;
+    }
+
+    .bookCard p {
+        font-size: small;
     }
 
     .bookCardContent {
         margin-left:  0px;
     }
+
 
 }
 
